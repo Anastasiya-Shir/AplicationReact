@@ -11,15 +11,24 @@ function Films() {
   }, []);
 
   const [items, setItems] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
   const fetchFilms = async () => {
+    setLoading(true);
+
     const data = await fetch('https://soft.silverscreen.by:8443/wssite/webapi/event/data?filter=%7B%22city%22:1%7D&extended=true')
 
-    const items = await data.json();
+    const item = await data.json();
 
-    setItems(items);
+    setItems(item);
+    setLoading(false);
   }
+  if (isLoading) {
 
+    return (
+      <div>"Movies are Loading"</div>
+    )
+  }
   return (
 
     <div>

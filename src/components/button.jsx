@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import Films from "./films";
 // import { Link } from 'react-router-dom';
 
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 function movieCard() {
-  console.log()
+  console.log("hi")
 }
 
 function Button() {
+  const { eventId } = useParams();
+
+  console.log(eventId)
   return (<button onClick={movieCard}  >
     Buy
   </button>)
