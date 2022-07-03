@@ -1,0 +1,61 @@
+.App {
+  text-align: center;
+}
+
+.logo{
+width: 50px;
+} 
+
+ .header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding:3% 10%;
+  background-color: aqua;
+ }
+
+ .button{
+  width: 100px;
+ }
+
+ .filmCard{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+margin-bottom: 250px;
+ }
+
+ .filmCard a{
+  margin: 50px;
+  width: 50%;
+  height: 40px;
+  background-color:aquamarine;
+  
+ }
+
+ .filmCard img{
+  width: 40%;
+  opacity: 0.4;
+  margin: 0.40px;
+ }
+
+ .filmCard img:hover{
+  width:50%;
+  opacity:1;
+ }
+
+ .movieDetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 250px; 
+ }
+
+ .movieDetails p{
+  text-align: center;
+  width: 50%;
+ }
