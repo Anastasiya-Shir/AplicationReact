@@ -1,8 +1,7 @@
 
 import React, { useState, useEffect } from "react";
-import Button from "./button";
+import Movie from "./Movie";
 import '../App.css';
-import { Link } from 'react-router-dom';
 
 function Films() {
 
@@ -15,37 +14,27 @@ function Films() {
 
   const fetchFilms = async () => {
     setLoading(true);
-
+    setLoading(false);
     const data = await fetch('https://soft.silverscreen.by:8443/wssite/webapi/event/data?filter=%7B%22city%22:1%7D&extended=true')
 
     const item = await data.json();
 
     setItems(item);
-    setLoading(false);
+
   }
   if (isLoading) {
 
     return (
-      <div>"Movies are Loading"</div>
+      <div>Movies are Loading</div>
     )
   }
   return (
 
     <div>
 
-      {items.map(item => (
-        <div key={item.eventId}>
+      {items.map(item => <Movie item={item} />)
 
-          <div className="filmCard" >
 
-            <Link to={`/movie-description/${item.eventId}`}>{item.name}</Link>
-
-            <img src={item.posterLink} alt="movie"></img>
-
-            <Button />
-          </div>
-        </div>
-      ))
       }
     </div>
   )

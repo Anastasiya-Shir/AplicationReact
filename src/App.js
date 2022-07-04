@@ -1,8 +1,8 @@
 
 import './App.css';
-import Header from './components/header';
-import Films from './components/films';
-import Dicription from './components/disription';
+import Header from './components/Header';
+import Films from './components/Films';
+import Dicription from './components/Disription';
 import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 
 function App() {

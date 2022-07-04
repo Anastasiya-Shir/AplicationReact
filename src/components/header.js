@@ -5,9 +5,9 @@ function Header() {
 
   return (
 
-    <div className='header'>;
+    <div className='header'>
 
-      <img src={logo} className="logo" />;
+      <img src={logo} className="logo" alt=" movie poster" />
 
       <button className='button'> sign in</button>;
     </div>

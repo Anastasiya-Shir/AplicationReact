@@ -32,7 +32,12 @@ margin-bottom: 250px;
   width: 50%;
   height: 40px;
   background-color:aquamarine;
-  
+  text-decoration: none;
+  color: black;
+  font-size: large;
+  border-radius: 50px;
+ text-align: center;
+  padding: 0;
  }
 
  .filmCard img{

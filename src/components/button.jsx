@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Films from "./films";
-// import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from 'react-router-dom';
 
-import { useParams } from 'react-router-dom';
+function Button(props) {
 
-function movieCard() {
-  console.log("hi")
-}
-
-function Button() {
-  const { eventId } = useParams();
-
-  console.log(eventId)
-  return (<button onClick={movieCard}  >
+  const { buttonFir } = props;
+  return (<Link to={`/movie-description/${buttonFir}`}  >
     Buy
-  </button>)
-
-  // return (
-  //   // <Link to="/movie-description/:id" >Buy</Link>
-  //   <Link to={`/movie-description/${eventId}`}>Buy</Link>
-  // )
+  </Link>)
 }
 
 export default Button
