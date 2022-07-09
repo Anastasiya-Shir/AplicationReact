@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 
 import logo from '../logo.png';
 
 function Header() {
+  // const [formType, setFormType] = useState();
 
+  // function showForm(){
+
+  // }
   return (
     <div className='header'>
 

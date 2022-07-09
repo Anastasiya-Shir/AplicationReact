@@ -105,3 +105,17 @@ margin-bottom: 250px;
     transform: rotate(360deg);
   }
 } 
+ 
+.goUp {
+  display: none;
+}
+
+.show{
+  display: inline;
+  width:150px;
+  height: 30px;
+  border-radius: 50px;
+  
+background: #00ffff;
+border: none;
+}

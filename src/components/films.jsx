@@ -33,7 +33,8 @@ function Films() {
     try {
       const data = await fetch(`https://soft.silverscreen.by:8443/wssite/webapi/event/data?filter=%7B%22city%22:${value}%7D&extended=true`)
       // const item = [];
-      const item = await data.json(); setLoading(false);
+      const item = await data.json();
+      setLoading(false);
 
       setItems(item);
 
@@ -76,7 +77,7 @@ function Films() {
                     <option>Гродно</option>
                   </select>
 
-                  <p>{value}</p>
+                  {/* <button className={scroll < 300 ? 'goUp' : "show"} onClick={handleButton}> Go Up</button> */}
 
                   {items.map((item) => <Movie key={item.eventId} item={item} />)};
                 </>)
