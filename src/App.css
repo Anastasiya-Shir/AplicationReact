@@ -1,33 +1,34 @@
-.App {
+.app {
   text-align: center;
 }
 
-.logo{
+.logo {
   width: 50px;
 } 
 
- .header {
+.header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 3% 10%;
   background-color: #00ffff;
- }
+  width: 80%;
+}
 
- .button{
+.button{
   width: 100px;
- }
+}
 
- .filmCard{
+.movieCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-margin-bottom: 250px;
- }
+  margin-bottom: 250px;
+}
 
- .filmCard a{
+.movieCard a {
   margin: 50px;
   width: 50%;
   height: 40px;
@@ -36,36 +37,36 @@ margin-bottom: 250px;
   color: black;
   font-size: large;
   border-radius: 50px;
- text-align: center;
+  text-align: center;
   padding: 0;
- }
+}
 
- .filmCard img{
+.movieCard img {
   width: 40%;
   opacity: 0.4;
-  margin: 0.40px;
- }
+  margin: 1px;
+}
 
- .filmCard img:hover{
+.movieCard img:hover {
   width:50%;
   opacity:1;
- }
+}
 
- .movieDetails{
+.movieDetails {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   margin-bottom: 250px; 
- }
+}
 
- .movieDetails p{
+.movieDetails p {
   text-align: center;
   width: 50%;
- }
+}
 
- .loader {
+.loader {
   width: 48px;
   height: 48px;
   border: 2px solid #ff0000;
@@ -74,8 +75,9 @@ margin-bottom: 250px;
   position: relative;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
- margin-top:30%;
-}
+  margin-top:30%;
+} 
+
 .loader::after,
 .loader::before {
   content: '';  
@@ -89,6 +91,7 @@ margin-bottom: 250px;
   transform: translate(150%, 150%);
   border-radius: 50%;
 }
+
 .loader::before {
   left: auto;
   top: auto;
@@ -105,17 +108,23 @@ margin-bottom: 250px;
     transform: rotate(360deg);
   }
 } 
- 
+
 .goUp {
   display: none;
 }
 
-.show{
+.show {
   display: inline;
   width:150px;
   height: 30px;
-  border-radius: 50px;
-  
-background: #00ffff;
-border: none;
+  border-radius: 50px;  
+  background: #00ffff;
+  border: none;
+  }
+
+.modal{
+  width: 100px;
+  height:200px;
+  background-color: #ff0000;
+  display: none;
 }

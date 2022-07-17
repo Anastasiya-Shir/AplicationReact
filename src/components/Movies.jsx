@@ -5,7 +5,7 @@ import Movie from "./Movie";
 
 import '../App.css';
 
-function Films() {
+function Movies() {
   const [value, setValue] = useState(1);
   const [items, setItems] = useState([]);
   const [isLoading, setLoading] = useState(false);
@@ -87,4 +87,4 @@ function Films() {
   );
 }
 
-export default Films;
+export default Movies;

@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 
 import logo from '../logo.png';
 
-function Header() {
-  // const [formType, setFormType] = useState();
+function Header(props) {
 
-  // function showForm(){
+  const { setOpen } = props
 
-  // }
   return (
     <div className='header'>
 
       <img src={logo} className="logo" alt=" movie poster" />
 
-      <button className='button'> sign in</button>;
+      <button type="button" onClick={function () { setOpen(true) }}> Open Modal </button>
     </div>
   )
 };
