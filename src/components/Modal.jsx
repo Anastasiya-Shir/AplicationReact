@@ -24,7 +24,7 @@ export default function BasicModal(props) {
 
   if (formType) {
 
-    return <ModalSecond open={open} setOpen={setOpen} />
+    return <ModalSecond open={open} setOpen={setOpen} setFormType={setFormType} />
   } else {
 
     return <ModalFirst open={open} setOpen={setOpen} formType={formType} setFormType={setFormType} />

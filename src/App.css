@@ -128,3 +128,23 @@
   background-color: #ff0000;
   display: none;
 }
+
+.noErrorMessege{
+  display:none;
+}
+.errorMessege{
+  color: #ff0000;
+}
+
+.activeButon:disabled{
+display:none  
+}
+
+.onLogin{
+  display:inline;
+  color: #ad2;
+
+}
+.offLogin{
+  display:none;
+}
