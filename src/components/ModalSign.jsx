@@ -37,43 +37,37 @@ export default function ModalFirst(props) {
 
   function sigIn() {
 
-
     const isUserAuthrized = {
       email,
-
-      // isAutr: false,
     };
+
     const usersJson = localStorage.getItem('users');
     const users = JSON.parse(usersJson)
-    console.log({ users })
-    console.log({ email })
+
     const searchUser = () => {
-      const userInfo = users.find(item => item.email === email)
+      const userInfo = users.find(item => item.email === email);
 
       return userInfo
     }
-    if (searchUser() && searchUser().password == password) {
 
+    if (searchUser() && searchUser().password == password) {
       users.forEach(element => {
         element.isAuth = false;
-
       });
 
       searchUser().isAuth = true;
       localStorage.setItem(" isUserAuthrized ", JSON.stringify([isUserAuthrized]));
       console.log({ users })
       localStorage.setItem("users", JSON.stringify(users));
-      // console.log(searchUser().isAutr)
       alert(" Sign in")
 
     } else alert("Check you password or email")
-
   }
 
   const getbuttonDisabled = () => {
     if (password.length > 0 && email.length > 0) {
-      setButtonDisabled(false)
-    } else setButtonDisabled(true)
+      setButtonDisabled(false);
+    } else setButtonDisabled(true);
   }
 
   return (
@@ -88,6 +82,7 @@ export default function ModalFirst(props) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Sign in
           </Typography>
+
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           </Typography>
 
@@ -110,6 +105,7 @@ export default function ModalFirst(props) {
               width: '60%',
               marginBottom: '10px',
             }}></input>
+
             <p className={errorMesege ? 'errorMessege' : "noErrorMessege"} >Неккорерктно введен email</p>
             <input value={password} type="password" placeholder='Password'
               onChange={(e) => { setPVavue(e.target.value); console.log(password); getbuttonDisabled() }}
@@ -119,9 +115,13 @@ export default function ModalFirst(props) {
             </input>
 
           </form>
+
           <button disabled={buttonDisabled} onClick={sigIn}>Sign in</button>
+
           <a> Forgot your password?</a>
+
           <p> Don't have an account yet?</p>
+
           <a onClick={function () {
             setFormType(true)
           }} > Create one?</a>

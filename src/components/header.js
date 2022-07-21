@@ -6,10 +6,10 @@ import logo from '../logo.png';
 function Header(props) {
 
   const { setOpen } = props
-  const emailJson = localStorage.getItem('isUserAuthrized');//получает nul??
+  const emailJson = localStorage.getItem('isUserAuthrized');// почему  получает nul ??
   const usersEmail = JSON.parse(emailJson);
   console.log({ emailJson })
-  // const email = usersEmail.email
+
   return (
     <div className='header'>
 
