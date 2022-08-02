@@ -77,8 +77,6 @@ function Movies() {
                     <option>Гродно</option>
                   </select>
 
-                  {/* <button className={scroll < 300 ? 'goUp' : "show"} onClick={handleButton}> Go Up</button> */}
-
                   {items.map((item) => <Movie key={item.eventId} item={item} />)};
                 </>)
             )

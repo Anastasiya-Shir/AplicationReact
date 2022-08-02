@@ -11,17 +11,23 @@ function App() {
 
   return (
 
-    <><Router>
-      <div className="app">
-        <Header setOpen={setOpen} />
-        <Routes>
-          <Route exact path="/" element={<Movies />} />
-          <Route path="/movie-description/:eventId" element={<Dicription />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </div>
-    </Router>
-      <BasicModal open={open} setOpen={setOpen} /></>
+    <>
+      <Router>
+
+        <div className="app">
+
+          <Header setOpen={setOpen} />
+
+          <Routes>
+            <Route exact path="/" element={<Movies />} />
+            <Route path="/movie-description/:eventId" element={<Dicription />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
+      </Router>
+
+      <BasicModal open={open} setOpen={setOpen} />
+    </>
   );
 }
 

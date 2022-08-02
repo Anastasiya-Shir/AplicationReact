@@ -16,59 +16,84 @@ const style = {
   p: 4,
 };
 
-
-export default function ModalFirst(props) {
-  const { open } = props;
-  const { setOpen } = props;
-  const { setFormType } = props;
+const ModalSignIn = (props) => {
+  const { open, setOpen, setFormType } = props;
   const [password, setPVavue] = useState("")
   const [email, setemail] = useState("");
-  const [errorMesege, SetErrorMessege] = useState(false);
+  const [errorMesege, setErrorMessege] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true)
   const handleClose = () => setOpen(false);
 
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
-
+    console.log(`${email} hahah2`)
     return (re.test(email));
   };
 
 
 
-  function sigIn() {
+  const signIn = () => {
 
     const isUserAuthrized = {
       email,
     };
 
     const usersJson = localStorage.getItem('users');
-    const users = JSON.parse(usersJson)
+    const users = JSON.parse(usersJson) || [];
 
-    const searchUser = () => {
+    function searchUser() {
       const userInfo = users.find(item => item.email === email);
 
-      return userInfo
+      return userInfo;
     }
-
-    if (searchUser() && searchUser().password == password) {
+    const searchUserInfo = searchUser();
+    if (searchUserInfo && searchUserInfo.password === password) {
       users.forEach(element => {
         element.isAuth = false;
       });
 
-      searchUser().isAuth = true;
-      localStorage.setItem(" isUserAuthrized ", JSON.stringify([isUserAuthrized]));
-      console.log({ users })
+      searchUserInfo.isAuth = true;
+
+      localStorage.setItem("isUserAuthrized", JSON.stringify(isUserAuthrized));
+
       localStorage.setItem("users", JSON.stringify(users));
+
       alert(" Sign in")
+      const event = new StorageEvent('storage', {
+        key: 'isUserAuthrized',
+        newValue: email,
+      });
+      window.dispatchEvent(event);
+    } else alert("Check you password or email");
 
-    } else alert("Check you password or email")
   }
-
   const getbuttonDisabled = () => {
     if (password.length > 0 && email.length > 0) {
       setButtonDisabled(false);
     } else setButtonDisabled(true);
   }
+
+  const handleChangeInput = (type) => (e) => {
+    switch (type) {
+      case 'email':
+
+        setemail(e.target.value);
+
+
+        validateEmail(email);
+
+        setErrorMessege(!validateEmail(email));
+        getbuttonDisabled();
+        break;
+      case 'Password':
+
+        setPVavue(e.target.value);
+        getbuttonDisabled();
+        break;
+      default: console.log("error")
+    }
+  }
+
 
   return (
     <div>
@@ -93,22 +118,14 @@ export default function ModalFirst(props) {
             width: "80%"
 
           }}>
-            <input placeholder='Email' onChange={(e) => {
-              if (validateEmail(e.target.value)) {
-                SetErrorMessege(false)
-                getbuttonDisabled()
-              } else {
-                SetErrorMessege(true)
-
-              }; setemail(e.target.value); console.log(email)
-            }} style={{
+            <input type="email" placeholder='Email' onChange={handleChangeInput('email')} style={{
               width: '60%',
               marginBottom: '10px',
             }}></input>
 
             <p className={errorMesege ? 'errorMessege' : "noErrorMessege"} >Неккорерктно введен email</p>
             <input value={password} type="password" placeholder='Password'
-              onChange={(e) => { setPVavue(e.target.value); console.log(password); getbuttonDisabled() }}
+              onChange={handleChangeInput('Password')}
               style={{
                 width: '60%',
               }}>
@@ -116,7 +133,7 @@ export default function ModalFirst(props) {
 
           </form>
 
-          <button disabled={buttonDisabled} onClick={sigIn}>Sign in</button>
+          <button disabled={buttonDisabled} onClick={signIn}>Sign in</button>
 
           <a> Forgot your password?</a>
 
@@ -134,3 +151,6 @@ export default function ModalFirst(props) {
     </div>
   );
 }
+
+
+export default ModalSignIn;

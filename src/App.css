@@ -109,7 +109,7 @@
   }
 } 
 
-.goUp {
+.go-up {
   display: none;
 }
 
@@ -136,7 +136,7 @@
   color: #ff0000;
 }
 
-.activeButon:disabled{
+.activeButton:disabled{
 display:none  
 }
 

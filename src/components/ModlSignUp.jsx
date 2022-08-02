@@ -16,12 +16,12 @@ const style = {
   p: 4,
 };
 
-export default function ModalSecond(props) {
+export default function ModalSignUp(props) {
   const { open } = props;
   const { setOpen } = props;
   const { setFormType } = props
-  const [firstNamemail, setFirstNamemail] = useState("");
-  const [lastNamemail, setLastNamemail] = useState("");
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
   const [phonemail, setPhonemail] = useState("");
   const [repeatpassword, setRepeatpassword] = useState("");
   const [password, setpassword] = useState("");
@@ -41,7 +41,7 @@ export default function ModalSecond(props) {
   };
 
   const getbuttonDisabled = () => {
-    if (firstNamemail.length > 0 && lastNamemail.length > 0 && phonemail.length > 0 && repeatpassword.length > 0 && password.length > 0 && email.length > 0 && errorMesege === false) {
+    if (firstName.length > 0 && lastName.length > 0 && phonemail.length > 0 && repeatpassword.length > 0 && password.length > 0 && email.length > 0 && errorMesege === false) {
       setButtonDisabled(false)
     } else setButtonDisabled(true)
   } //нужно иссправить баг с disabled button() разобра]]]]]]]]]]]]]]]]]]]]]]
@@ -67,6 +67,8 @@ export default function ModalSecond(props) {
       email,
       password,
       isAuth: false,
+      firstName,
+      lastName,
     };
 
     if (!searchsimpleUser(users, newUser)) {
@@ -111,13 +113,13 @@ export default function ModalSecond(props) {
             }}>
             </input>
 
-            <input placeholder='first Name' onChange={(e) => { setFirstNamemail(e.target.value); console.log(firstNamemail); getbuttonDisabled() }} style={{
+            <input placeholder='first Name' onChange={(e) => { setfirstName(e.target.value); console.log(firstName); getbuttonDisabled() }} style={{
               width: '60%', marginBottom: '10px',
             }}>
             </input>
 
             <input placeholder='last 
-             Name' onChange={(e) => { setLastNamemail(e.target.value); console.log(lastNamemail); getbuttonDisabled() }} style={{
+             Name' onChange={(e) => { setlastName(e.target.value); console.log(lastName); getbuttonDisabled() }} style={{
                 width: '60%', marginBottom: '10px',
               }}>
             </input>

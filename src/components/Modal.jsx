@@ -1,7 +1,9 @@
 import React from 'react';
 
-import ModalFirst from './ModalSign';
-import ModalSecond from './ModlSignUp';
+import { useState } from 'react';
+
+import ModalSignIn from './ModalSign';
+import ModalSignUp from './ModlSignUp';
 
 
 
@@ -18,16 +20,16 @@ const style = {
 };
 
 export default function BasicModal(props) {
-  const [formType, setFormType] = React.useState(false);
+  const [formType, setFormType] = useState(false);
   const { open } = props;
   const { setOpen } = props;
 
   if (formType) {
 
-    return <ModalSecond open={open} setOpen={setOpen} setFormType={setFormType} />
+    return <ModalSignUp open={open} setOpen={setOpen} setFormType={setFormType} />
   } else {
 
-    return <ModalFirst open={open} setOpen={setOpen} formType={formType} setFormType={setFormType} />
+    return <ModalSignIn open={open} setOpen={setOpen} formType={formType} setFormType={setFormType} />
   }
 
 }
