@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Movies from './components/Movies';
 import NotFoundPage from './components/NotFoundPage';
-import Dicription from './components/Disription';
+import Description from './components/Disription';
 import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 import BasicModal from './components/Modal';
 function App() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
 
@@ -20,7 +20,7 @@ function App() {
 
           <Routes>
             <Route exact path="/" element={<Movies />} />
-            <Route path="/movie-description/:eventId" element={<Dicription />} />
+            <Route path="/movie-description/:eventId" element={<Description />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>

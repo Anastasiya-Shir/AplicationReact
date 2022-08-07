@@ -1,8 +1,7 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from 'react-router-dom';
 
-function Dicription() {
+const Description = () => {
   const [post, setPost] = useState([]);
   const { name, annotation, posterLink } = post;
   const { eventId } = useParams();
@@ -22,7 +21,7 @@ function Dicription() {
   }
 
   return (
-    <div className="movieDetails">
+    <div className="movie-details">
 
       <h1>"{name}"</h1>
 
@@ -33,5 +32,5 @@ function Dicription() {
   );
 }
 
-export default Dicription;
+export default Description;
 

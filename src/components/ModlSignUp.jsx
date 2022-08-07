@@ -17,18 +17,26 @@ const style = {
 };
 
 export default function ModalSignUp(props) {
-  const { open } = props;
-  const { setOpen } = props;
-  const { setFormType } = props
+  const { open, setOpen, setFormType } = props;
+
   const [firstName, setfirstName] = useState("");
+
   const [lastName, setlastName] = useState("");
+
   const [phonemail, setPhonemail] = useState("");
+
   const [repeatpassword, setRepeatpassword] = useState("");
+
   const [password, setpassword] = useState("");
-  const [email, setemail] = useState("");
-  const [errorMesege, SetErrorMessege] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(true)
-  const [login, setLogin] = useState(false)
+
+  const [email, setEmail] = useState("");
+
+  const [errorMesege, setErrorMessege] = useState(false);
+
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
+  const [login, setLogin] = useState(false);
+
   const handleClose = () => {
     setOpen(false)
     setFormType(false)
@@ -40,18 +48,15 @@ export default function ModalSignUp(props) {
     return (re.test(email));
   };
 
-  const getbuttonDisabled = () => {
+  const getBtnDisabled = () => {
     if (firstName.length > 0 && lastName.length > 0 && phonemail.length > 0 && repeatpassword.length > 0 && password.length > 0 && email.length > 0 && errorMesege === false) {
       setButtonDisabled(false)
     } else setButtonDisabled(true)
   } //нужно иссправить баг с disabled button() разобра]]]]]]]]]]]]]]]]]]]]]]
 
   const validPassword = (a, b) => {
-    if (a === b) {
-
-      SetErrorMessege(false);
-      setButtonDisabled(true);
-    } else SetErrorMessege(true)
+    (a === b) ? setErrorMessege(false) && setButtonDisabled(true)
+      : setErrorMessege(true);
   }
 
   const searchsimpleUser = (users, newUser) => {
@@ -100,10 +105,10 @@ export default function ModalSignUp(props) {
             width: "80%"
           }} >
             <input placeholder='Email' onChange={(e) => {
-              setemail(e.target.value); if (validateEmail(email)) {
-                SetErrorMessege(false)
+              setEmail(e.target.value); if (validateEmail(email)) {
+                setErrorMessege(false)
               } else {
-                SetErrorMessege(true)
+                setErrorMessege(true)
 
               };
 
@@ -113,26 +118,26 @@ export default function ModalSignUp(props) {
             }}>
             </input>
 
-            <input placeholder='first Name' onChange={(e) => { setfirstName(e.target.value); console.log(firstName); getbuttonDisabled() }} style={{
+            <input placeholder='first Name' onChange={(e) => { setfirstName(e.target.value); console.log(firstName); getBtnDisabled() }} style={{
               width: '60%', marginBottom: '10px',
             }}>
             </input>
 
             <input placeholder='last 
-             Name' onChange={(e) => { setlastName(e.target.value); console.log(lastName); getbuttonDisabled() }} style={{
+             Name' onChange={(e) => { setlastName(e.target.value); console.log(lastName); getBtnDisabled() }} style={{
                 width: '60%', marginBottom: '10px',
               }}>
             </input>
 
-            <input placeholder='phone' onChange={(e) => { setPhonemail(e.target.value); console.log(phonemail); getbuttonDisabled() }} style={{
+            <input placeholder='phone' onChange={(e) => { setPhonemail(e.target.value); console.log(phonemail); getBtnDisabled() }} style={{
               width: '60%', marginBottom: '10px',
             }}></input>
 
-            <input type="password" placeholder='Password' onChange={(e) => { setpassword(e.target.value); console.log(password); getbuttonDisabled(); validPassword(e.target.value, repeatpassword) }} style={{
+            <input type="password" placeholder='Password' onChange={(e) => { setpassword(e.target.value); console.log(password); getBtnDisabled(); validPassword(e.target.value, repeatpassword) }} style={{
               width: '60%', marginBottom: '10px',
             }}></input>
 
-            <input type="password" placeholder=' repeat password' onChange={(e) => { setRepeatpassword(e.target.value); console.log(repeatpassword); getbuttonDisabled(); validPassword(password, e.target.value) }} style={{
+            <input type="password" placeholder=' repeat password' onChange={(e) => { setRepeatpassword(e.target.value); console.log(repeatpassword); getBtnDisabled(); validPassword(password, e.target.value) }} style={{
               width: '60%',
             }}></input>
             <p className={errorMesege ? 'errorMessege' : "noErrorMessege"} >Неправильно введеные данные</p>

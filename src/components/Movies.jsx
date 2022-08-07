@@ -6,10 +6,15 @@ import Movie from "./Movie";
 import '../App.css';
 
 function Movies() {
+
   const [value, setValue] = useState(1);
+
   const [items, setItems] = useState([]);
+
   const [isLoading, setLoading] = useState(false);
+
   const [isEmpty, setEmpty] = useState(false);
+
   const [isError, setError] = useState(false);
 
   useEffect(() => {

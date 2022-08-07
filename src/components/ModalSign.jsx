@@ -19,7 +19,7 @@ const style = {
 const ModalSignIn = (props) => {
   const { open, setOpen, setFormType } = props;
   const [password, setPVavue] = useState("")
-  const [email, setemail] = useState("");
+  const [email, setEmail] = useState("");
   const [errorMesege, setErrorMessege] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true)
   const handleClose = () => setOpen(false);
@@ -67,28 +67,27 @@ const ModalSignIn = (props) => {
     } else alert("Check you password or email");
 
   }
-  const getbuttonDisabled = () => {
-    if (password.length > 0 && email.length > 0) {
-      setButtonDisabled(false);
-    } else setButtonDisabled(true);
+
+  const getBtnDisabled = () => {
+    (password.length && email.length) ? setButtonDisabled(false) : setButtonDisabled(true);
   }
 
   const handleChangeInput = (type) => (e) => {
     switch (type) {
       case 'email':
 
-        setemail(e.target.value);
+        setEmail(e.target.value);
 
 
         validateEmail(email);
 
         setErrorMessege(!validateEmail(email));
-        getbuttonDisabled();
+        getBtnDisabled();
         break;
       case 'Password':
 
         setPVavue(e.target.value);
-        getbuttonDisabled();
+        getBtnDisabled();
         break;
       default: console.log("error")
     }
@@ -123,7 +122,7 @@ const ModalSignIn = (props) => {
               marginBottom: '10px',
             }}></input>
 
-            <p className={errorMesege ? 'errorMessege' : "noErrorMessege"} >Неккорерктно введен email</p>
+            <p className={errorMesege ? 'errorMessege' : "noErrorMessege"} >Check your email</p>
             <input value={password} type="password" placeholder='Password'
               onChange={handleChangeInput('Password')}
               style={{
@@ -137,7 +136,7 @@ const ModalSignIn = (props) => {
 
           <a> Forgot your password?</a>
 
-          <p> Don't have an account yet?</p>
+          <a> Don't have an account yet?</a>
 
           <a onClick={function () {
             setFormType(true)
