@@ -1,0 +1,152 @@
+$turquoise: #00ffff;
+$red: #ff0000;
+$aquamarine:#7fffd4;
+
+.app {
+  text-align: center;
+}
+
+.logo {
+  width:45px;
+} 
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 3% 10%;
+  background-color:$turquoise;
+  width: 80%;
+}
+
+.button{
+  width: 100px;
+}
+
+.movieCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 250px;
+}
+
+.movieCard a {
+  margin: 50px;
+  width: 50%;
+  height: 40px;
+  background-color:$aquamarine;
+  text-decoration: none;
+  color: black;
+  font-size: large;
+  border-radius: 50px;
+  text-align: center;
+  padding: 0;
+}
+
+.movieCard img {
+  width: 40%;
+  opacity: 0.4;
+  margin: 1px;
+}
+
+.movieCard img:hover {
+  width:50%;
+  opacity:1;
+}
+
+.movie-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 250px; 
+}
+
+.movieDetails p {
+  text-align: center;
+  width: 50%;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 2px solid $red;  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin-top:30%;
+} 
+
+.loader::after,
+.loader::before {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #FF3D00;
+  width: 6px;
+  height: 6px;
+  transform: translate(150%, 150%);
+  border-radius: 50%;
+}
+
+.loader::before {
+  left: auto;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  transform: translate(-150%, -150%);
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+
+.go-up {
+  display: none;
+}
+
+.show {
+  display: inline;
+  width:150px;
+  height: 30px;
+  border-radius: 50px;  
+  background:$turquoise;
+  border: none;
+  }
+
+.modal{
+  width: 100px;
+  height:200px;
+  background-color: $red ; display: none;
+}
+
+.noErrorMessege{
+  display:none;
+}
+.errorMessege{
+  color: $red;
+}
+
+.activeButton:disabled{
+display:none  
+}
+
+.onLogin{
+  display:inline;
+  color: #ad2;
+
+}
+.offLogin{
+  display:none;
+}
