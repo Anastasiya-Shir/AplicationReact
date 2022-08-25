@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 import logo from '../logo.png';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { getFilm } from './store/searchSlice';
+
 function Header(props) {
   const [isUserAuthorized, setIsUserAuthorized] = useState("");
-
+  const [inputSearch, setInputSearch] = useState('');
   useEffect(() => {
     const auth = localStorage.getItem('isUserAuthrized');
     const usersauth = JSON.parse(auth) || [];
@@ -20,8 +23,21 @@ function Header(props) {
     setOpen(false);
   })
 
+  const searhcFilms = useSelector(state => state.search.search)
+
+
+  const dispatch = useDispatch();
+  const searchFilm = () => dispatch(getFilm(searhcFilms));
   return (
     <div className='header'>
+      <form onSubmit={e => e.preventDefault()}>
+        <input onChange={function (e) {
+          setInputSearch(e.target.value)
+          console.log(inputSearch)
+        }} placeholder='serch'></input>
+        <button onClick={searchFilm}> search</button>
+
+      </form>
 
       <img src={logo} className="logo" alt=" movie poster" />
       {isUserAuthorized === undefined
