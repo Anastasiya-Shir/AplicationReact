@@ -5,11 +5,11 @@ import Movie from "./Movie";
 
 import '../App.css';
 
-function Movies() {
+function Movies(props) {
 
   const [value, setValue] = useState(1);
 
-  const [items, setItems] = useState([]);
+  const { items, setItems } = props;
 
   const [isLoading, setLoading] = useState(false);
 
@@ -61,6 +61,7 @@ function Movies() {
       <span className="loader"></span>
     )
   }
+
 
   return (
     <div>

@@ -14,7 +14,7 @@ function Header(props) {
     setIsUserAuthorized(usersauth.email)
   }, [])
 
-  const { setOpen } = props;
+  const { setOpen, items } = props;
 
   window.addEventListener('storage', (e) => {
     const emailJson = localStorage.getItem('isUserAuthrized');
@@ -23,18 +23,33 @@ function Header(props) {
     setOpen(false);
   })
 
-  const searhcFilms = useSelector(state => state.search.search)
+  const searchFilms = useSelector(state => state.search.search)
 
 
   const dispatch = useDispatch();
-  const searchFilm = () => dispatch(getFilm(searhcFilms));
+  const searchFilm = () => {
+    dispatch(getFilm({ inputSearch }))
+
+  };
+
   return (
     <div className='header'>
       <form onSubmit={e => e.preventDefault()}>
         <input onChange={function (e) {
           setInputSearch(e.target.value)
-          console.log(inputSearch)
-        }} placeholder='serch'></input>
+          console.log(e.target.value)
+          if (searchFilms.length > 0) {
+            console.log(searchFilms[(searchFilms.length - 1)])
+            console.log(items)
+            let findFilms = items.find(items => items.acronym === searchFilms[0].searchFilms)
+            if (findFilms) {
+              console.log(findFilms.eventId)
+            }
+          }
+        }} placeholder='serch'>
+
+        </input>
+
         <button onClick={searchFilm}> search</button>
 
       </form>
@@ -46,6 +61,12 @@ function Header(props) {
           localStorage.removeItem("isUserAuthrized")
           setIsUserAuthorized(undefined)
         }}> Sign out  </button></div>}
+
+
+
+
+
+
     </div>
   )
 };

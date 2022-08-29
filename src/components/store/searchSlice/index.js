@@ -1,18 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"; let i = 0;
 const searchSlice = createSlice({
+
   name: "search",
   initialState: {
     search: [],
   },
   reducers: {
     getFilm(state, action) {
+
       console.log(state);
       console.log(action);
       state.search.push({
-        searchFilms: action.payload.searchFilms,
+        id: ++i,
+        searchFilms: action.payload.inputSearch,
 
       })
-      console.log(action.payload)
+      console.log(action.payload.inputSearch)
+
     }
   }
 })
