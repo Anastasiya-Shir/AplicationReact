@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Movies from './components/Movies';
 import NotFoundPage from './components/NotFoundPage';
 import Description from './components/Disription';
+
 import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 import BasicModal from './components/Modal';
 function App() {
@@ -12,6 +13,8 @@ function App() {
 
   const [items, setItems] = useState([]);
 
+  const [findFilms, setFindFilms] = useState([]);
+
   return (
 
     <>
@@ -19,12 +22,13 @@ function App() {
 
         <div className="app">
 
-          <Header setOpen={setOpen} items={items} />
+          <Header setOpen={setOpen} items={items} setFindFilms={setFindFilms} />
 
           <Routes>
-            <Route exact path="/" element={<Movies items={items} setItems={setItems} />} />
+            <Route exact path="/" element={<Movies items={items} setItems={setItems} findFilms={findFilms} />} />
             <Route path="/movie-description/:eventId" element={<Description />} />
             <Route path="*" element={<NotFoundPage />} />
+
           </Routes>
         </div>
       </Router>

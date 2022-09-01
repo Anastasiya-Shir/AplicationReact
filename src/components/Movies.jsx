@@ -9,7 +9,7 @@ function Movies(props) {
 
   const [value, setValue] = useState(1);
 
-  const { items, setItems } = props;
+  const { items, setItems, findFilms } = props;
 
   const [isLoading, setLoading] = useState(false);
 
@@ -61,7 +61,7 @@ function Movies(props) {
       <span className="loader"></span>
     )
   }
-
+  console.log("findfmov", findFilms)
 
   return (
     <div>
@@ -82,8 +82,8 @@ function Movies(props) {
                     <option>Минск</option>
                     <option>Гродно</option>
                   </select>
-
-                  {items.map((item) => <Movie key={item.eventId} item={item} />)};
+                  {findFilms.length > 0 ? findFilms.map((item) => <Movie key={item.eventId} item={item} />) : items.map((item) => <Movie key={item.eventId} item={item} />)}
+                  {/* {items.map((item) => <Movie key={item.eventId} item={item} />)}; */}
                 </>)
             )
         )}

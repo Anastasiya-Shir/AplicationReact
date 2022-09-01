@@ -7,16 +7,10 @@ const searchSlice = createSlice({
   },
   reducers: {
     getFilm(state, action) {
-
-      console.log(state);
-      console.log(action);
       state.search.push({
         id: ++i,
         searchFilms: action.payload.inputSearch,
-
       })
-      console.log(action.payload.inputSearch)
-
     }
   }
 })
