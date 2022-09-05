@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import logo from '../logo.png';
-
 import { getFilm } from './store/searchSlice';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import useDebounce from "./function/use-debounce";
 
 function Header(props) {
   const [isUserAuthorized, setIsUserAuthorized] = useState("");
+
   const [inputSearch, setInputSearch] = useState('');
 
-  const navigate = useNavigate();
+  const debouncedSearchTerm = useDebounce(inputSearch, 1000);
 
   const { setOpen, items, setFindFilms } = props;
 
   useEffect(() => {
     const auth = localStorage.getItem('isUserAuthrized');
+
     const usersauth = JSON.parse(auth) || [];
+
     setIsUserAuthorized(usersauth.email)
   }, []);
 
   window.addEventListener('storage', (e) => {
     const emailJson = localStorage.getItem('isUserAuthrized');
+
     const usersEmail = JSON.parse(emailJson) || [];
+
     setIsUserAuthorized(usersEmail.email);
+
     setOpen(false);
   })
 
@@ -33,52 +37,37 @@ function Header(props) {
   const dispatch = useDispatch();
 
   let searchFilm = () => {
-    items.forEach(element => {
-      console.log(element.acronym, "acronym")
-    });
-
     let findFilms = items.filter(items =>
       items.acronym.toUpperCase().includes(searchFilms[searchFilms.length - 1].searchFilms.toUpperCase()))
-    console.log(searchFilms, "то что ищем")
-    findFilms.forEach(element => {
-      console.log(element.acronym, "i find")
-    });
-    console.log(findFilms)
     if (findFilms) {
       setFindFilms(findFilms)
-      findFilms.forEach(element => {
-        console.log(element.eventId)
-      });
-      console.log(findFilms.eventId)
-      // navigate(`/movie-search/${findFilms.eventId}`);
-
     }
-
   };
 
   useEffect(() => {
-    const newMovies = inputSearch
-    console.log(newMovies)
-    setInputSearch(newMovies)
-    console.log(inputSearch, 'update')
-    dispatch(getFilm({ inputSearch }))
-  }, [inputSearch])
+    const newMovies = inputSearch;
+
+    setInputSearch(newMovies);
+
+    dispatch(getFilm({ inputSearch }));
+    // Убедиться что у нас есть значение (пользователь ввел что-то)
+    if (debouncedSearchTerm) {
+      searchFilm();
+    }
+
+  }, [inputSearch, debouncedSearchTerm]);
 
 
 
   return (
     <div className='header'>
       <form onSubmit={e => e.preventDefault()}>
-        <input onChange={function (e) {
+        <input type="search" onChange={function (e) {
           setInputSearch(e.target.value)
-          console.log("передает ", inputSearch)
-          searchFilm()
         }
         } placeholder='serch'>
 
         </input>
-
-        {/* <button onClick={searchFilm}> search</button> */}
 
       </form>
 
