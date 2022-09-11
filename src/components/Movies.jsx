@@ -5,8 +5,17 @@ import Movie from "./Movie";
 
 import '../App.css';
 
-function Movies(props) {
+import { isLoadingMovies } from "./store/toggleIsFetchingReducer";
 
+import { useDispatch } from 'react-redux';
+
+// import getMoviesListThunk from './store/thunk/LoadingMovieList'
+
+import addMovies from './store/thunk/LoadingMovieList';
+import fetchMovies from './store/thunk/LoadingMovieList';
+
+function Movies(props) {
+  const dispatch = useDispatch();
   const [value, setValue] = useState(1);
 
   const { items, setItems, findFilms } = props;
@@ -17,11 +26,21 @@ function Movies(props) {
 
   const [isError, setError] = useState(false);
 
+
+
+
   useEffect(() => {
     fetchFilms()
+    dispatch(fetchMovies());
   }, [value]);
 
+  // useEffect(() => {
+  //   console.log(isLoading)
+
+  // }, [isLoading])
   function changeSelect(event) {
+
+
     if (event.target.value === "Минск") {
       setValue(1);
 
@@ -36,9 +55,12 @@ function Movies(props) {
     setLoading(true);
 
     try {
+      // const data = getMoviesListThunk(value)
       const data = await fetch(`https://soft.silverscreen.by:8443/wssite/webapi/event/data?filter=%7B%22city%22:${value}%7D&extended=true`)
       // const item = [];
+      console.log(value)
       const item = await data.json();
+
       setLoading(false);
 
       setItems(item);
@@ -61,7 +83,7 @@ function Movies(props) {
       <span className="loader"></span>
     )
   }
-  console.log("findfmov", findFilms)
+
 
   return (
     <div>
