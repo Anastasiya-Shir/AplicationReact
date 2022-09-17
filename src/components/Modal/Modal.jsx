@@ -2,8 +2,8 @@ import React from 'react';
 
 import { useState } from 'react';
 
-import ModalSignIn from './ModalSign';
-import ModalSignUp from './ModlSignUp';
+import ModalSignIn from '../ModalSigin/ModalSign';
+import ModalSignUp from '../MadalsignUp/ModlSignUp';
 
 
 

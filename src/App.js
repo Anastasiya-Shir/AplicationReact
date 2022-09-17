@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './App.css';
-import Header from './components/Header';
-import Movies from './components/Movies';
+import Header from './components/Header/Header';
+import Movies from './components/Movies/Movies';
 import NotFoundPage from './components/NotFoundPage';
-import Description from './components/Disription';
+import Description from './components/Description/Disription';
 
 import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
-import BasicModal from './components/Modal';
+import BasicModal from './components/Modal/Modal';
 function App() {
 
   const [open, setOpen] = useState(false);

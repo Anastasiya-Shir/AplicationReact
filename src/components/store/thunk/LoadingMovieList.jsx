@@ -15,16 +15,29 @@
 // export default getMoviesListThunk
 
 
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isRejectedWithValue } from "@reduxjs/toolkit";
 
 export const fetchMovies = createAsyncThunk(
+
   'fetchFilms/fetchMovies',
-  async function () {
-    const data = await fetch(`https://soft.silverscreen.by:8443/wssite/webapi/event/data?filter=%7B%22city%22:1%7D&extended=true`)
+  async function (_, isRejectedWithValue) {
+
+    const value = 1;
+    try {
+      const data = await fetch(`https://soft.silverscreen.by:8443/wssite/webapi/event/data?filter=%7B%22city%22:${value}%7D&extended=true`)
+      if (!data.ok) {
+        throw new Error("Server error")
+      }
+      const item = await data.json();
+      return item;
+    } catch (error) {
+      return isRejectedWithValue(error.messege)
+    }
+
     // const item = []; 
 
-    const item = await data.json();
-    return item;
+
+
   }
 
 );
@@ -35,6 +48,8 @@ const toggleIsFetching = createSlice({
   name: "fetchFilms",
   initialState: {
     films: [],
+    status: null,
+    error: false,
   },
   reducers: {
     addMovies(state, action) {
@@ -43,13 +58,20 @@ const toggleIsFetching = createSlice({
     }
   },
   extraReducers: {
-    // [fetchMovies.pending]: (state, action) => {
-    //   //загрузка
-    // },
+    [fetchMovies.pending]: (state, action) => {
+      console.log("load")
+      state.status = false;
+      state.error = false;
+    },
     [fetchMovies.fulfilled]: (state, action) => {
       state.films = action.payload;
+      state.status = true;
+      state.error = false;
+
     },
     [fetchMovies.rejected]: (state, action) => {
+      state.status = false;
+      state.error = action.payload
       console.log("error")
     }
   }

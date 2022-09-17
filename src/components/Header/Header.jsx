@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import logo from '../logo.png';
-import { getFilm } from './store/searchSlice';
-import useDebounce from "./function/use-debounce";
+import logo from '../../logo.png';
+
+import useDebounce from "../../service/use-debounce";
+
+import { getFilm } from '../store/searchSlice';
 
 function Header(props) {
   const [isUserAuthorized, setIsUserAuthorized] = useState("");
@@ -14,13 +16,10 @@ function Header(props) {
 
   const { setOpen, items, setFindFilms } = props;
 
-  useEffect(() => {
-    const auth = localStorage.getItem('isUserAuthrized');
+  const searchFilms = useSelector(state => state.search.search);
 
-    const usersauth = JSON.parse(auth) || [];
+  const dispatch = useDispatch();
 
-    setIsUserAuthorized(usersauth.email)
-  }, []);
 
   window.addEventListener('storage', (e) => {
     const emailJson = localStorage.getItem('isUserAuthrized');
@@ -31,10 +30,6 @@ function Header(props) {
 
     setOpen(false);
   })
-
-  const searchFilms = useSelector(state => state.search.search);
-
-  const dispatch = useDispatch();
 
   let searchFilm = () => {
     let findFilms = items.filter(items =>
@@ -54,34 +49,39 @@ function Header(props) {
     if (debouncedSearchTerm) {
       searchFilm();
     }
-
   }, [inputSearch, debouncedSearchTerm]);
 
+  useEffect(() => {
+    const auth = localStorage.getItem('isUserAuthrized');
 
+    const usersauth = JSON.parse(auth) || [];
+
+    setIsUserAuthorized(usersauth.email);
+  }, []);
 
   return (
     <div className='header'>
+
       <form onSubmit={e => e.preventDefault()}>
+
         <input type="search" onChange={function (e) {
           setInputSearch(e.target.value)
         }
         } placeholder='serch'>
 
         </input>
-
       </form>
 
       <img src={logo} className="logo" alt=" movie poster" />
       {isUserAuthorized === undefined
         ? <button type="button" onClick={function () { setOpen(true) }}> Sign in  </button>
         : <div > Hello, {isUserAuthorized}
+
           <button type="button" onClick={function () {
             localStorage.removeItem("isUserAuthrized")
             setIsUserAuthorized(undefined)
           }}> Sign out  </button>
-
         </div>}
-
     </div>
   )
 };
