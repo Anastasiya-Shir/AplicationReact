@@ -11,7 +11,7 @@ import { isModalOpen } from '../store/ModalSlice';
 function Header(props) {
   const { setOpen, setFindFilms } = props;
 
-  const [isUserAuthorized, setIsUserAuthorized] = useState("");
+  const [isUserAuthorized, setIsUserAuthorized] = useState('');
 
   const [inputSearch, setInputSearch] = useState('');
 
