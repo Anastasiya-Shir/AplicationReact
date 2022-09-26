@@ -1,49 +1,20 @@
-// import { LineAxisOutlined } from "@mui/icons-material";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// import axios from 'axios';
+import axios from 'axios';
 
-
-
-// const getMoviesListThunk = (value) => {
-//   async (dispatch) => {
-//     const data = await axios.get(`https://soft.silverscreen.by:8443/wssite/webapi/event/data?filter=%7B%22city%22:${value}%7D&extended=true`)
-//     const item = await data.json();
-//     console.log(item)
-//     return item
-//   }
-// }
-// export default getMoviesListThunk
-
-
-import { createAsyncThunk, createSlice, isRejectedWithValue } from "@reduxjs/toolkit";
+import { MINSK } from "../../../const/Const";
 
 export const fetchMovies = createAsyncThunk(
 
-  'fetchFilms/fetchMovies',
-  async function (_, isRejectedWithValue) {
+  'fetchFilms/fetchMovies', async () => {
+    const response = await axios.get(
+      `https://soft.silverscreen.by:8443/wssite/webapi/event/data?filter=%7B%22city%22:${MINSK}%7D&extended=true`
+    );
 
-    const value = 1;
-    try {
-      const data = await fetch(`https://soft.silverscreen.by:8443/wssite/webapi/event/data?filter=%7B%22city%22:${value}%7D&extended=true`)
-      if (!data.ok) {
-        throw new Error("Server error")
-      }
-      const item = await data.json();
-      return item;
-    } catch (error) {
-      return isRejectedWithValue(error.messege)
-    }
-
-    // const item = []; 
-
-
-
-  }
-
-);
+    return response.data;
+  });
 
 const toggleIsFetching = createSlice({
-
 
   name: "fetchFilms",
   initialState: {
@@ -59,7 +30,6 @@ const toggleIsFetching = createSlice({
   },
   extraReducers: {
     [fetchMovies.pending]: (state, action) => {
-      console.log("load")
       state.status = false;
       state.error = false;
     },

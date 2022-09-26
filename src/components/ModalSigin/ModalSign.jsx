@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import { useEffect } from 'react';
+
+import { Form, Field } from 'react-final-form'
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
+
+import { useSelector, useDispatch } from 'react-redux';
 
 const style = {
   position: 'absolute',
@@ -17,19 +23,19 @@ const style = {
 };
 
 const ModalSignIn = (props) => {
-  const { open, setOpen, setFormType } = props;
-  const [password, setPVavue] = useState("")
-  const [email, setEmail] = useState("");
+
+  const { setFormType } = props;
+  const [password, setPVavue] = useState('')
+  const [email, setEmail] = useState('');
   const [errorMesege, setErrorMessege] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(true)
-  const handleClose = () => setOpen(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const dispatch = useDispatch();
 
-  const validateEmail = (email) => {
-    const re = /\S+@\S+\.\S+/;
-    console.log(`${email} hahah2`)
-    return (re.test(email));
-  };
-
+  // const handleClose = () => setOpen(false);
+  const handleClose = () => dispatch(isModalOpen(false));
+  const isModalOpen = useSelector(state => state.isOpen.isOpen);
+  console.log(isModalOpen, "open");
+  // dispatch(isModalOpen(false));
 
 
   const signIn = () => {
@@ -46,7 +52,9 @@ const ModalSignIn = (props) => {
 
       return userInfo;
     }
+
     const searchUserInfo = searchUser();
+
     if (searchUserInfo && searchUserInfo.password === password) {
       users.forEach(element => {
         element.isAuth = false;
@@ -65,7 +73,6 @@ const ModalSignIn = (props) => {
       });
       window.dispatchEvent(event);
     } else alert("Check you password or email");
-
   }
 
   const getBtnDisabled = () => {
@@ -78,10 +85,9 @@ const ModalSignIn = (props) => {
 
         setEmail(e.target.value);
 
+        validateEmail(e.target.value);
 
-        validateEmail(email);
-
-        setErrorMessege(!validateEmail(email));
+        setErrorMessege(!validateEmail(e.target.value));
         getBtnDisabled();
         break;
       case 'Password':
@@ -92,12 +98,24 @@ const ModalSignIn = (props) => {
       default: console.log("error")
     }
   }
+  const validateEmail = (mail) => {
+    const re = /\S+@\S+\.\S+/;
 
-
+    return (re.test(mail));
+  };
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+  const onSubmit = async values => {
+    await sleep(300)
+    window.alert(JSON.stringify(values, 0, 2))
+  }
   return (
     <div>
+
+
+
       <Modal
-        open={open}
+        open={isModalOpen}
+
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

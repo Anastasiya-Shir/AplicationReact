@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import searchReducer from "./searchSlice";
-import toggleIsFetchingReducer from './thunk/LoadingMovieList'
+import searchReducer from "./searchQuery";
+import toggleIsFetchingReducer from './thunk/LoadingMovieList';
+import modalSliceReducer from './ModalSlice/index';
 // import toggleIsFetchingReducer from "./toggleIsFetchingReducer"
 export default configureStore({
   reducer: {
     search: searchReducer,
-    AddMovies: toggleIsFetchingReducer,
+    addMovies: toggleIsFetchingReducer,
+    isOpen: modalSliceReducer,
   },
 
 })

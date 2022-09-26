@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
+import { useSelector, useDispatch } from 'react-redux';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -17,19 +18,19 @@ const style = {
 };
 
 export default function ModalSignUp(props) {
-  const { open, setOpen, setFormType } = props;
+  const { setFormType } = props;
 
-  const [firstName, setfirstName] = useState("");
+  const [firstName, setfirstName] = useState('');
 
-  const [lastName, setlastName] = useState("");
+  const [lastName, setlastName] = useState('');
 
-  const [phonemail, setPhonemail] = useState("");
+  const [phonemail, setPhonemail] = useState('');
 
-  const [repeatpassword, setRepeatpassword] = useState("");
+  const [repeatpassword, setRepeatpassword] = useState('');
 
-  const [password, setpassword] = useState("");
+  const [password, setpassword] = useState('');
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   const [errorMesege, setErrorMessege] = useState(false);
 
@@ -37,8 +38,12 @@ export default function ModalSignUp(props) {
 
   const [login, setLogin] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const isModalOpen = useSelector(state => state.isOpen.isOpen);
+
   const handleClose = () => {
-    setOpen(false)
+    dispatch(isModalOpen(false))
     setFormType(false)
   };
 
@@ -85,7 +90,7 @@ export default function ModalSignUp(props) {
   return (
     <div>
       <Modal
-        open={open}
+        open={isModalOpen}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

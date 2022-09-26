@@ -7,29 +7,29 @@ import Movie from "../Movie/Movie";
 import '../../App.css';
 
 import { fetchMovies } from '../store/thunk/LoadingMovieList';
-
+import { MINSK, GRODNO } from "../../const/Const";
 function Movies(props) {
 
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(MINSK);
 
   const { items, setItems, findFilms } = props;
 
   const dispatch = useDispatch();
 
-  const status = useSelector(state => state.AddMovies.status);
+  const status = useSelector(state => state.addMovies.status);
 
-  const error = useSelector(state => state.AddMovies.error);
+  const error = useSelector(state => state.addMovies.error);
 
-  const item = useSelector(state => state.AddMovies.films)
+  const item = useSelector(state => state.addMovies.films)
 
   function changeSelect(event) {
     if (event.target.value === "Минск") {
-      setValue(1);
+      setValue(MINSK);
 
-      return setValue(1);
+      return setValue(MINSK);
     } else {
 
-      return (setValue(5))
+      (setValue(GRODNO))
     }
   };
 
@@ -39,32 +39,32 @@ function Movies(props) {
   }, [value]);
 
   if (!status) {
-
     return (
       <span className="loader"></span>
     )
   }
 
-  return (
-    <div>
-      {error
-        ?
-        (<div> “Ooops, something went wrong” </div>)
-        : (
-          !item ?
-            (<p>We’ve found no movies, sorry!</p>)
-            :
-            (<>
-              <select onChange={changeSelect} className="selectCity">
-                <option>Минск</option>
-                <option>Гродно</option>
-              </select>
-              {findFilms.length > 0 ? findFilms.map((item) => <Movie key={item.eventId} item={item} />) : item.map((item) => <Movie key={item.eventId} item={item} />)}
+  // return (
+  //   <div>
 
-            </>)
-        )}
-    </div>
-  );
+  if (error) {
+
+    return <div> “Ooops, something went wrong” </div>
+  } else if (!item) {
+
+    return <p>We’ve found no movies, sorry!</p>
+  } else {
+
+    return (
+      <>
+        <select onChange={changeSelect} className="selectCity">
+          <option>Минск</option>
+          <option>Гродно</option>
+        </select>
+        {findFilms.length > 0 ? findFilms.map((item) => <Movie key={item.eventId} item={item} />) : item.map((item) => <Movie key={item.eventId} item={item} />)}
+
+      </>)
+  }
 }
 
 export default Movies;

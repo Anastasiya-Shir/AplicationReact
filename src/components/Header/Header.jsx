@@ -5,21 +5,22 @@ import logo from '../../logo.png';
 
 import useDebounce from "../../service/use-debounce";
 
-import { getFilm } from '../store/searchSlice';
+import { getFilm } from '../store/searchQuery';
+import { isModalOpen } from '../store/ModalSlice';
 
 function Header(props) {
+  const { setOpen, setFindFilms } = props;
+
   const [isUserAuthorized, setIsUserAuthorized] = useState("");
 
   const [inputSearch, setInputSearch] = useState('');
 
   const debouncedSearchTerm = useDebounce(inputSearch, 1000);
 
-  const { setOpen, items, setFindFilms } = props;
-
   const searchFilms = useSelector(state => state.search.search);
 
   const dispatch = useDispatch();
-
+  const items = useSelector(state => state.addMovies.films)
 
   window.addEventListener('storage', (e) => {
     const emailJson = localStorage.getItem('isUserAuthrized');
@@ -28,16 +29,26 @@ function Header(props) {
 
     setIsUserAuthorized(usersEmail.email);
 
-    setOpen(false);
+    dispatch(isModalOpen(false))
   })
 
   let searchFilm = () => {
+
     let findFilms = items.filter(items =>
       items.acronym.toUpperCase().includes(searchFilms[searchFilms.length - 1].searchFilms.toUpperCase()))
+
     if (findFilms) {
       setFindFilms(findFilms)
     }
   };
+
+  function Def(e) {
+    e.preventDefault();
+  }
+
+  function search(e) {
+    setInputSearch(e.target.value)
+  }
 
   useEffect(() => {
     const newMovies = inputSearch;
@@ -46,10 +57,8 @@ function Header(props) {
 
     dispatch(getFilm({ inputSearch }));
     // Убедиться что у нас есть значение (пользователь ввел что-то)
-    if (debouncedSearchTerm) {
-      searchFilm();
-    }
-  }, [inputSearch, debouncedSearchTerm]);
+
+  }, [inputSearch]);
 
   useEffect(() => {
     const auth = localStorage.getItem('isUserAuthrized');
@@ -59,14 +68,17 @@ function Header(props) {
     setIsUserAuthorized(usersauth.email);
   }, []);
 
+  useEffect(() => {
+    searchFilm();
+
+  }, [debouncedSearchTerm]);
+
   return (
     <div className='header'>
 
-      <form onSubmit={e => e.preventDefault()}>
+      <form onSubmit={Def}>
 
-        <input type="search" onChange={function (e) {
-          setInputSearch(e.target.value)
-        }
+        <input type="search" onChange={search
         } placeholder='serch'>
 
         </input>
@@ -74,7 +86,10 @@ function Header(props) {
 
       <img src={logo} className="logo" alt=" movie poster" />
       {isUserAuthorized === undefined
-        ? <button type="button" onClick={function () { setOpen(true) }}> Sign in  </button>
+        ? <button type="button" onClick={function () {
+          setOpen(true)
+          dispatch(isModalOpen(true))
+        }}> Sign in  </button>
         : <div > Hello, {isUserAuthorized}
 
           <button type="button" onClick={function () {
