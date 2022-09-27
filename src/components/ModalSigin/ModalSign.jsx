@@ -6,9 +6,12 @@ import { Form, Field } from 'react-final-form'
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
+import Button from '@mui/material/Button';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import Styles from "./Styles";
 
 import { useSelector, useDispatch } from 'react-redux';
+import { isModalOpen } from '../store/ModalSlice';
 
 const style = {
   position: 'absolute',
@@ -33,10 +36,13 @@ const ModalSignIn = (props) => {
 
   // const handleClose = () => setOpen(false);
   const handleClose = () => dispatch(isModalOpen(false));
-  const isModalOpen = useSelector(state => state.isOpen.isOpen);
-  console.log(isModalOpen, "open");
+  const isModalOpen1 = useSelector(state => state.isOpen.isOpen);
+  console.log(isModalOpen1, "open");
   // dispatch(isModalOpen(false));
+  useEffect(() => {
+    console.log(email, "emaaail")
 
+  }, [email]);
 
   const signIn = () => {
 
@@ -108,64 +114,158 @@ const ModalSignIn = (props) => {
     await sleep(300)
     window.alert(JSON.stringify(values, 0, 2))
   }
+
+  const container = {
+    background: ' #AAF0D1',
+  }
+
+  function Def(e) {
+    e.preventDefault();
+  }
   return (
-    <div>
+    <Modal
+      open={isModalOpen1}
+      onClose={handleClose}
+
+    >
+      <Styles>
 
 
 
-      <Modal
-        open={isModalOpen}
+        <Form
 
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Sign in
-          </Typography>
+          onSubmit={onSubmit}
 
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          </Typography>
+          validate={values => {
 
-          <form style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: "80%"
+            const errors = {}
+            if (!values.email) {
+              console.log(values.email, "valuesemail")
+              errors.email = 'Required'
+            }
+            if (!values.password) {
+              errors.password = 'Required'
+            }
 
-          }}>
-            <input type="email" placeholder='Email' onChange={handleChangeInput('email')} style={{
-              width: '60%',
-              marginBottom: '10px',
-            }}></input>
+            return errors
+          }}
 
-            <p className={errorMesege ? 'errorMessege' : "noErrorMessege"} >Check your email</p>
-            <input value={password} type="password" placeholder='Password'
-              onChange={handleChangeInput('Password')}
-              style={{
-                width: '60%',
-              }}>
-            </input>
+          render={({ form, submitting, pristine, values, email, password, handleCloseModal, handleChangeInput }) => (
+            <form style={container} >
+              <h2>Sign In</h2>
 
-          </form>
+              <Field name="email">
+                {({ input, meta }) => (
+                  <div>
+                    <label>Email</label>
 
-          <button disabled={buttonDisabled} onClick={signIn}>Sign in</button>
+                    <input type="text" value={email}
+                      placeholder="Email" />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
 
-          <a> Forgot your password?</a>
+                  </div>
+                )}
+              </Field>
 
-          <a> Don't have an account yet?</a>
+              <Field name="password">
+                {({ input, meta }) => (
+                  <div>
+                    <label>Password</label>
 
-          <a onClick={function () {
-            setFormType(true)
-          }} > Create one?</a>
+                    <input {...input} type="password"
+                      value={password} onChange={handleChangeInput} placeholder="Password" />
+                    {meta.error && meta.touched && <span>{meta.error}</span>}
+
+                  </div>
+                )}
+              </Field>
+
+              <div className="buttons">
+                <button type="submit" disabled={submitting} onClick={signIn}>
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  onClick={form.reset}
+                  disabled={!email || !password}
 
 
-        </Box>
 
-      </Modal>
+                >
+                  Reset
+                </button>
+                <div className="create-acc-notification">
+                  Don't you have an account?
+                </div>
+              </div>
 
-    </div>
+              <Button className="create-acc-btn"
+                onClick={function () {
+                  setFormType(true)
+                }
+                }
+
+
+              >Create one</Button>
+            </form>
+          )}
+        />
+      </Styles>
+    </Modal>
+    // <div>
+    //   <Modal
+    //     open={isModalOpen}
+
+    //     onClose={handleClose}
+    //     aria-labelledby="modal-modal-title"
+    //     aria-describedby="modal-modal-description"
+    //   >
+    //     <Box sx={style}>
+    //       <Typography id="modal-modal-title" variant="h6" component="h2">
+    //         Sign in
+    //       </Typography>
+
+    //       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+    //       </Typography>
+
+    //       <form style={{
+    //         display: 'flex',
+    //         flexDirection: 'column',
+    //         alignItems: 'center',
+    //         width: "80%"
+
+    //       }}>
+    //         <input type="email" placeholder='Email' onChange={handleChangeInput('email')} style={{
+    //           width: '60%',
+    //           marginBottom: '10px',
+    //         }}></input>
+
+    //         <p className={errorMesege ? 'errorMessege' : "noErrorMessege"} >Check your email</p>
+    //         <input value={password} type="password" placeholder='Password'
+    //           onChange={handleChangeInput('Password')}
+    //           style={{
+    //             width: '60%',
+    //           }}>
+    //         </input>
+
+    //       </form>
+
+    //       <button disabled={buttonDisabled} onClick={signIn}>Sign in</button>
+
+    //       <a> Forgot your password?</a>
+
+    //       <a> Don't have an account yet?</a>
+
+    //       <a onClick={function () {
+    //         setFormType(true)
+    //       }} > Create one?</a>
+
+
+    //     </Box>
+
+    //   </Modal>
+
+    // </div>
   );
 }
 

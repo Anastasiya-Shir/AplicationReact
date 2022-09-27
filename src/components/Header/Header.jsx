@@ -87,7 +87,7 @@ function Header(props) {
       <img src={logo} className="logo" alt=" movie poster" />
       {isUserAuthorized === undefined
         ? <button type="button" onClick={function () {
-          setOpen(true)
+          // setOpen(true)
           dispatch(isModalOpen(true))
         }}> Sign in  </button>
         : <div > Hello, {isUserAuthorized}
