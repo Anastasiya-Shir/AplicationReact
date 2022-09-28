@@ -3,13 +3,11 @@ import { useEffect } from 'react';
 
 import { Form, Field } from 'react-final-form'
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import Styles from "./Styles";
 
+import Styles from "./Styles";
 import { useSelector, useDispatch } from 'react-redux';
 import { isModalOpen } from '../store/ModalSlice';
 
@@ -34,15 +32,11 @@ const ModalSignIn = (props) => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const dispatch = useDispatch();
 
-  // const handleClose = () => setOpen(false);
   const handleClose = () => dispatch(isModalOpen(false));
-  const isModalOpen1 = useSelector(state => state.isOpen.isOpen);
-  console.log(isModalOpen1, "open");
-  // dispatch(isModalOpen(false));
-  useEffect(() => {
-    console.log(email, "emaaail")
 
-  }, [email]);
+  const isModalOpen1 = useSelector(state => state.isOpen.isOpen);
+
+
 
   const signIn = () => {
 
@@ -81,9 +75,9 @@ const ModalSignIn = (props) => {
     } else alert("Check you password or email");
   }
 
-  const getBtnDisabled = () => {
-    (password.length && email.length) ? setButtonDisabled(false) : setButtonDisabled(true);
-  }
+  // const getBtnDisabled = () => {
+  //   (password.length && email.length) ? setButtonDisabled(false) : setButtonDisabled(true);
+  // }
 
   const handleChangeInput = (type) => (e) => {
     switch (type) {
@@ -91,25 +85,29 @@ const ModalSignIn = (props) => {
 
         setEmail(e.target.value);
 
-        validateEmail(e.target.value);
+        // validateEmail(e.target.value);
 
-        setErrorMessege(!validateEmail(e.target.value));
-        getBtnDisabled();
+        // setErrorMessege(!validateEmail(e.target.value));
+        // getBtnDisabled();
         break;
       case 'Password':
 
         setPVavue(e.target.value);
-        getBtnDisabled();
+        // console.log(password, "setpassword")
+        // getBtnDisabled();
         break;
       default: console.log("error")
     }
   }
-  const validateEmail = (mail) => {
-    const re = /\S+@\S+\.\S+/;
 
-    return (re.test(mail));
-  };
-  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+  // const validateEmail = (mail) => {
+  //   const re = /\S+@\S+\.\S+/;
+
+  //   return (re.test(mail));
+  // };
+
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
   const onSubmit = async values => {
     await sleep(300)
     window.alert(JSON.stringify(values, 0, 2))
@@ -122,6 +120,15 @@ const ModalSignIn = (props) => {
   function Def(e) {
     e.preventDefault();
   }
+
+  useEffect(() => {
+
+  }, [email]);
+
+  useEffect(() => {
+
+  }, [password]);
+
   return (
     <Modal
       open={isModalOpen1}
@@ -129,8 +136,6 @@ const ModalSignIn = (props) => {
 
     >
       <Styles>
-
-
 
         <Form
 
@@ -140,7 +145,7 @@ const ModalSignIn = (props) => {
 
             const errors = {}
             if (!values.email) {
-              console.log(values.email, "valuesemail")
+
               errors.email = 'Required'
             }
             if (!values.password) {
@@ -150,8 +155,8 @@ const ModalSignIn = (props) => {
             return errors
           }}
 
-          render={({ form, submitting, pristine, values, email, password, handleCloseModal, handleChangeInput }) => (
-            <form style={container} >
+          render={({ form, submitting, pristine, values, email, password, handleCloseModal }) => (
+            <form style={container} onSubmit={Def} >
               <h2>Sign In</h2>
 
               <Field name="email">
@@ -159,12 +164,13 @@ const ModalSignIn = (props) => {
                   <div>
                     <label>Email</label>
 
-                    <input type="text" value={email}
-                      placeholder="Email" />
+                    <input type="email" value={email}
+                      placeholder="Email" onChange={handleChangeInput('email')} />
                     {meta.error && meta.touched && <span>{meta.error}</span>}
 
                   </div>
                 )}
+
               </Field>
 
               <Field name="password">
@@ -173,7 +179,7 @@ const ModalSignIn = (props) => {
                     <label>Password</label>
 
                     <input {...input} type="password"
-                      value={password} onChange={handleChangeInput} placeholder="Password" />
+                      value={password} onChange={handleChangeInput('Password')} placeholder="Password" />
                     {meta.error && meta.touched && <span>{meta.error}</span>}
 
                   </div>
@@ -182,18 +188,9 @@ const ModalSignIn = (props) => {
 
               <div className="buttons">
                 <button type="submit" disabled={submitting} onClick={signIn}>
-                  Submit
+                  sign wIn
                 </button>
-                <button
-                  type="button"
-                  onClick={form.reset}
-                  disabled={!email || !password}
 
-
-
-                >
-                  Reset
-                </button>
                 <div className="create-acc-notification">
                   Don't you have an account?
                 </div>
