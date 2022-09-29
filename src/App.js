@@ -7,6 +7,7 @@ import Description from './components/Description/Disription';
 
 import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 import BasicModal from './components/Modal/Modal';
+import AlertSegnIn from './components/AlertSigIn/AlertSigIn';
 function App() {
 
   const [open, setOpen] = useState(false);
@@ -14,6 +15,7 @@ function App() {
   const [items, setItems] = useState([]);
 
   const [findFilms, setFindFilms] = useState([]);
+
 
   return (
 
@@ -28,7 +30,7 @@ function App() {
             <Route exact path="/" element={<Movies items={items} setItems={setItems} findFilms={findFilms} />} />
             <Route path="/movie-description/:eventId" element={<Description />} />
             <Route path="*" element={<NotFoundPage />} />
-
+            {/* <Route path="/suscefully" element={<AlertSegnIn />} /> */}
           </Routes>
         </div>
       </Router>

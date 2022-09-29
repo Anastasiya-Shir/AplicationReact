@@ -10,7 +10,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Styles from "./Styles";
 import { useSelector, useDispatch } from 'react-redux';
 import { isModalOpen } from '../store/ModalSlice';
-
+import AlertSegnIn from "../AlertSigIn/AlertSigIn";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -66,12 +66,13 @@ const ModalSignIn = (props) => {
 
       localStorage.setItem("users", JSON.stringify(users));
 
-      alert(" Sign in")
       const event = new StorageEvent('storage', {
         key: 'isUserAuthrized',
         newValue: email,
       });
       window.dispatchEvent(event);
+      // return <AlertSegnIn />
+      alert(" Sign in")
     } else alert("Check you password or email");
   }
 
@@ -145,7 +146,7 @@ const ModalSignIn = (props) => {
 
             const errors = {}
             if (!values.email) {
-
+              console.log(values.email, "valuesemailin")
               errors.email = 'Required'
             }
             if (!values.password) {
@@ -188,7 +189,7 @@ const ModalSignIn = (props) => {
 
               <div className="buttons">
                 <button type="submit" disabled={submitting} onClick={signIn}>
-                  sign wIn
+                  sign In
                 </button>
 
                 <div className="create-acc-notification">

@@ -75,22 +75,25 @@ function Header(props) {
 
   return (
     <div className='header'>
+      <div className='logoSearch'> <img src={logo} className="logo" alt=" movie poster" />
+        <form onSubmit={Def}>
 
-      <form onSubmit={Def}>
+          <input type="search" onChange={search
+          } placeholder='serch'>
 
-        <input type="search" onChange={search
-        } placeholder='serch'>
+          </input>
+        </form>
+      </div>
 
-        </input>
-      </form>
 
-      <img src={logo} className="logo" alt=" movie poster" />
+
       {isUserAuthorized === undefined
         ? <button type="button" onClick={function () {
           // setOpen(true)
           dispatch(isModalOpen(true))
         }}> Sign in  </button>
-        : <div > Hello, {isUserAuthorized}
+        :
+        <div > Hello, {isUserAuthorized}
 
           <button type="button" onClick={function () {
             localStorage.removeItem("isUserAuthrized")

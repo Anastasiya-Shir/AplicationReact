@@ -5,9 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import '../../App.css';
 
 const Movie = (props) => {
-  const { item } = props;
+  const { item, setScroll } = props;
 
-  const [scroll, setScroll] = useState(0);
+  // const [scroll, setScroll] = useState(0);
 
   const navigate = useNavigate();
 
@@ -15,9 +15,6 @@ const Movie = (props) => {
     setScroll(window.scrollY);
   };
 
-  const goUpButton = () => {
-    window.scrollTo(0, 0);
-  }
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -32,7 +29,7 @@ const Movie = (props) => {
 
   return (
     <div >
-      <button className={scroll < 200 ? 'go-up' : "show"} onClick={goUpButton}> Go Up</button>
+
       <div className='movieCard' >
 
         <h1>{item.name}</h1>

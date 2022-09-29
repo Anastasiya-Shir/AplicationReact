@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useEffect } from 'react';
 //import Box from '@mui/material/Box';
 //import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -107,7 +107,9 @@ export default function ModalSignUp(props) {
   const container = {
     background: ' #AAF0D1',
   }
+  useEffect(() => {
 
+  }, [email]);
   return (
     <div>
       <Modal
@@ -126,13 +128,14 @@ export default function ModalSignUp(props) {
 
               const errors = {}
               if (!values.email) {
-                console.log(email, "email")
+                console.log(values.email, "emailValue")
                 errors.email = 'Required'
               }
               if (!values.password) {
                 errors.password = 'Required'
               } if (!values.firstName) {
                 errors.firstName = 'Required'
+                console.log(values.firstName, "firstName")
               } if (!values.lastName) {
                 errors.lastName = 'Required'
               } if (!values.phonemail) {
@@ -140,13 +143,14 @@ export default function ModalSignUp(props) {
               } if (!values.repeatpassword) {
                 errors.phone = 'Required'
               } if (values.password !== values.repeatpassword) {
-                errors.repeatpassword = 'Passwords are not equal';
+                console.log(repeatpassword, password, "repeatpassword, password")
+                errors.passwordsMatch = 'Passwords are not equal';
               }
 
               return errors
             }}
 
-            render={({ handleSignIn, form, submitting, pristine, values, email, password, handleChangeInput }) => (
+            render={({ handleSignIn, form, submitting, pristine, values, email, password, handleChangeInput, repeatpassword, lastName, firstName, phonemail }) => (
               <form style={container} onSubmit={Def}>
                 <h2>Sign Up</h2>
 
@@ -224,21 +228,19 @@ export default function ModalSignUp(props) {
                 <div className="buttons">
                   <button type="submit" onClick={function () {
                     setFormType(false)
-                  }} disabled={submitting}>
+                  }} >
                     to go sign in
                   </button>
                   <button
                     type="button"
                     onClick={handleSubmit}
-                  // disabled={submitting || pristine}
+                    disabled={pristine}
                   >
                     Login
                   </button>
                 </div>
 
-                <Button
 
-                  href="#text-buttons">Go to sign in</Button>
               </form>
             )}
           />

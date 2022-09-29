@@ -9,7 +9,7 @@ import '../../App.css';
 import { fetchMovies } from '../store/thunk/LoadingMovieList';
 import { MINSK, GRODNO } from "../../const/Const";
 function Movies(props) {
-
+  const [scroll, setScroll] = useState(0);
   const [value, setValue] = useState(MINSK);
 
   const { items, setItems, findFilms } = props;
@@ -43,9 +43,11 @@ function Movies(props) {
       <span className="loader"></span>
     )
   }
+  const goUpButton = () => {
+    window.scrollTo(0, 0);
+  }
 
-  // return (
-  //   <div>
+
 
   if (error) {
 
@@ -56,14 +58,16 @@ function Movies(props) {
   } else {
 
     return (
-      <>
-        <select onChange={changeSelect} className="selectCity">
+      <div className="Main">
+        <select onChange={changeSelect} className="selectCity" st>
           <option>Минск</option>
           <option>Гродно</option>
         </select>
-        {findFilms.length > 0 ? findFilms.map((item) => <Movie key={item.eventId} item={item} />) : item.map((item) => <Movie key={item.eventId} item={item} />)}
-
-      </>)
+        <button className={scroll < 200 ? 'go-up' : "show"} onClick={goUpButton}> Go Up</button>
+        <div className="movieList">
+          {findFilms.length > 0 ? findFilms.map((item) => <Movie key={item.eventId} item={item} />) : item.map((item) => <Movie key={item.eventId} item={item} setScroll={setScroll} />)}
+        </div>
+      </div>)
   }
 }
 
