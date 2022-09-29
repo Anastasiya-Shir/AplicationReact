@@ -1,4 +1,4 @@
-.app {
+фвв.app {
   text-align: center;
 }
 
@@ -14,9 +14,51 @@
   background-color: #00ffff;
   width: 80%;
 }
+.header button {
+  width: 150px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  color: #7fffd4;
+  background-color: #20B2AA;
+}
+.header button:hover {
+  cursor: pointer;
+  box-shadow: 0 0 6px 6px #00CED1;
+  transition: 0.3s;
+}
+.header input {
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
+  padding: 10px;
+  border: none;
+  margin-left: 10px;
+}
+.header .logoSearch {
+  display: flex;
+  flex-direction: row;
+}
 
-.button {
+.Main {
+  background: linear-gradient(90deg, #b9deed, #efefef);
+}
+.Main select {
   width: 100px;
+  height: 40px;
+  border: none;
+  background-color: #20B2AA;
+  margin: 10px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.movieList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .movieCard {
@@ -24,10 +66,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  margin-bottom: 250px;
+  margin-bottom: 100px;
 }
-
 .movieCard a {
   margin: 50px;
   width: 50%;
@@ -40,16 +80,33 @@
   text-align: center;
   padding: 0;
 }
-
 .movieCard img {
   width: 40%;
   opacity: 0.4;
-  margin: 1px;
+  margin: 10px;
 }
-
 .movieCard img:hover {
   width: 50%;
   opacity: 1;
+}
+.movieCard h1 {
+  font-size: 20px;
+  width: 300px;
+  padding: 0;
+}
+.movieCard button {
+  width: 40%;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  background-color: #00ffff;
+  color: #008080;
+  font-weight: 600;
+}
+.movieCard button:hover {
+  cursor: pointer;
+  box-shadow: 0 0 6px 2px #00CED1;
+  transition: 0.3s;
 }
 
 .movie-details {
@@ -74,7 +131,8 @@
   display: inline-block;
   position: relative;
   box-sizing: border-box;
-  animation: rotation 1s linear infinite;
+  -webkit-animation: rotation 1s linear infinite;
+          animation: rotation 1s linear infinite;
   margin-top: 30%;
 }
 
@@ -100,6 +158,15 @@
   transform: translate(-150%, -150%);
 }
 
+@-webkit-keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -114,11 +181,13 @@
 
 .show {
   display: inline;
+  position: fixed;
   width: 150px;
   height: 30px;
   border-radius: 50px;
   background: #00ffff;
   border: none;
+  right: 0;
 }
 
 .modal {
@@ -147,6 +216,4 @@
 
 .offLogin {
   display: none;
-}
-
-/*# sourceMappingURL=App.css.map */
+}/*# sourceMappingURL=App.css.map */
