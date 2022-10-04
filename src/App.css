@@ -1,4 +1,4 @@
-фвв.app {
+.app {
   text-align: center;
 }
 
@@ -48,7 +48,7 @@
   height: 40px;
   border: none;
   background-color: #20B2AA;
-  margin: 10px;
+  margin: 10px center;
   text-align: center;
   border-radius: 10px;
 }

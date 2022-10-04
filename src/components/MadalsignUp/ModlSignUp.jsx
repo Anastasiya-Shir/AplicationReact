@@ -8,6 +8,7 @@ import { Form, Field } from 'react-final-form';
 
 import { useSelector, useDispatch } from 'react-redux';
 import Styles from "../ModalSigin/Styles";
+import { addNewUser } from "../store/UsersSlice";
 //import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Button from '@mui/material/Button';
 const style = {
@@ -52,6 +53,9 @@ export default function ModalSignUp(props) {
     setFormType(false)
   };
 
+  const users = useSelector(state => state.addUsers.users);
+
+  const addUser = () => dispatch(addNewUser(email, lastName));
   // const validateEmail = (email) => {
   //   const re = /\S+@\S+\.\S+/;
 
@@ -233,8 +237,8 @@ export default function ModalSignUp(props) {
                   </button>
                   <button
                     type="button"
-                    onClick={handleSubmit}
-                    disabled={pristine}
+                    onClick={addUser}
+                  // disabled={pristine}
                   >
                     Login
                   </button>

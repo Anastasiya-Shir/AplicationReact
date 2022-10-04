@@ -10,7 +10,10 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Styles from "./Styles";
 import { useSelector, useDispatch } from 'react-redux';
 import { isModalOpen } from '../store/ModalSlice';
+
+
 import AlertSegnIn from "../AlertSigIn/AlertSigIn";
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -35,6 +38,7 @@ const ModalSignIn = (props) => {
   const handleClose = () => dispatch(isModalOpen(false));
 
   const isModalOpen1 = useSelector(state => state.isOpen.isOpen);
+
 
 
 
