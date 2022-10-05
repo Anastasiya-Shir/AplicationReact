@@ -38,7 +38,7 @@ const ModalSignIn = (props) => {
   const handleClose = () => dispatch(isModalOpen(false));
 
   const isModalOpen1 = useSelector(state => state.isOpen.isOpen);
-
+  const users = useSelector(state => state.addUsers.users);
 
 
 
@@ -48,8 +48,8 @@ const ModalSignIn = (props) => {
       email,
     };
 
-    const usersJson = localStorage.getItem('users');
-    const users = JSON.parse(usersJson) || [];
+    // const usersJson = localStorage.getItem('users');
+    // // const users = JSON.parse(usersJson) || [];
 
     function searchUser() {
       const userInfo = users.find(item => item.email === email);

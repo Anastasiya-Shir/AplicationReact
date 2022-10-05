@@ -7,6 +7,7 @@ const searchQuery = createSlice({
   },
   reducers: {
     getFilm(state, action) {
+
       state.search.push({
         id: ++i,
         searchFilms: action.payload.inputSearch,

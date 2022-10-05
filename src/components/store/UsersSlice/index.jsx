@@ -9,14 +9,15 @@ const userSlice = createSlice({
     addNewUser(state, action) {
       state.UserInfo = action.payload;
       console.log('addUser');
-
+      console.log(action, "actionnnnnn")
       console.log(action.payload.email, 'addUser');
       state.users.push({
         email: action.payload.email,
-        firstName: [],
-        lastName: [],
-        phone: action.payload.lastName,
-        password: [],
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        phone: action.payload.phonemail,
+        password: action.payload.password,
+        isAuth: false,
 
 
       })

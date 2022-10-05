@@ -53,9 +53,9 @@ export default function ModalSignUp(props) {
     setFormType(false)
   };
 
-  const users = useSelector(state => state.addUsers.users);
 
-  const addUser = () => dispatch(addNewUser(email, lastName));
+
+  const addUser = () => dispatch(addNewUser({ email, lastName, firstName, phonemail, password }));
   // const validateEmail = (email) => {
   //   const re = /\S+@\S+\.\S+/;
 
@@ -132,14 +132,14 @@ export default function ModalSignUp(props) {
 
               const errors = {}
               if (!values.email) {
-                console.log(values.email, "emailValue")
+
                 errors.email = 'Required'
               }
               if (!values.password) {
                 errors.password = 'Required'
               } if (!values.firstName) {
                 errors.firstName = 'Required'
-                console.log(values.firstName, "firstName")
+
               } if (!values.lastName) {
                 errors.lastName = 'Required'
               } if (!values.phonemail) {
@@ -147,7 +147,7 @@ export default function ModalSignUp(props) {
               } if (!values.repeatpassword) {
                 errors.phone = 'Required'
               } if (values.password !== values.repeatpassword) {
-                console.log(repeatpassword, password, "repeatpassword, password")
+
                 errors.passwordsMatch = 'Passwords are not equal';
               }
 
