@@ -7,10 +7,6 @@ const userSlice = createSlice({
   },
   reducers: {
     addNewUser(state, action) {
-      state.UserInfo = action.payload;
-      console.log('addUser');
-      console.log(action, "actionnnnnn")
-      console.log(action.payload.email, 'addUser');
       state.users.push({
         email: action.payload.email,
         firstName: action.payload.firstName,
@@ -18,11 +14,30 @@ const userSlice = createSlice({
         phone: action.payload.phonemail,
         password: action.payload.password,
         isAuth: false,
-
-
       })
+    },
+    isNotAuth(state, action) {
+      state.users.forEach(function (item) {
+        item.isAuth = false;
+        console.log(item.isAuth, "isAuth");
+      })
+    },
+
+    isAuth(state, action) {
+
+      let index = state.users.findIndex(item => item.email === action.payload.email)
+
+
+
+      console.log(state.users[0], "isAuthind000");
+      console.log(state.users[index], "isAuthind");
+      console.log(index, 'index')
+      state.users[index].isAuth = true;
+      //console.log(state.users, "isAuth");
+
     }
+
   }
 });
-export const { addNewUser } = userSlice.actions;
+export const { addNewUser, isAuth, isNotAuth } = userSlice.actions;
 export default userSlice.reducer;

@@ -10,8 +10,8 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Styles from "./Styles";
 import { useSelector, useDispatch } from 'react-redux';
 import { isModalOpen } from '../store/ModalSlice';
-
-
+import { isAuth } from "../store/UsersSlice";
+import { isNotAuth } from "../store/UsersSlice";
 import AlertSegnIn from "../AlertSigIn/AlertSigIn";
 
 const style = {
@@ -39,8 +39,8 @@ const ModalSignIn = (props) => {
 
   const isModalOpen1 = useSelector(state => state.isOpen.isOpen);
   const users = useSelector(state => state.addUsers.users);
-
-
+  const isAuthTwo = () => dispatch(isAuth(email));
+  const isNotAuthTwo = () => dispatch(isNotAuth());
 
   const signIn = () => {
 
@@ -52,23 +52,25 @@ const ModalSignIn = (props) => {
     // // const users = JSON.parse(usersJson) || [];
 
     function searchUser() {
+      console.log(users, "userInfo ")
       const userInfo = users.find(item => item.email === email);
-
+      console.log(userInfo, "userInfo ")
       return userInfo;
     }
 
     const searchUserInfo = searchUser();
 
     if (searchUserInfo && searchUserInfo.password === password) {
-      users.forEach(element => {
-        element.isAuth = false;
-      });
+      // users.forEach(element => {
+      //   element.isAuth = false;
+      // });
+      isNotAuthTwo();
+      // searchUserInfo.isAuth = true;
+      console.log("email auth", email)
+      isAuthTwo(email)
+      // localStorage.setItem("isUserAuthrized", JSON.stringify(isUserAuthrized));
 
-      searchUserInfo.isAuth = true;
-
-      localStorage.setItem("isUserAuthrized", JSON.stringify(isUserAuthrized));
-
-      localStorage.setItem("users", JSON.stringify(users));
+      // localStorage.setItem("users", JSON.stringify(users));
 
       const event = new StorageEvent('storage', {
         key: 'isUserAuthrized',

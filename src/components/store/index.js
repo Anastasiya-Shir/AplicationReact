@@ -7,17 +7,17 @@ import UsersSlice from './UsersSlice';
 import { persistReducer } from 'redux-persist'
 // import toggleIsFetchingReducer from "./toggleIsFetchingReducer"
 
-const persistConfig = {
-  key: 'root',
-  storage
-};
+// const persistConfig = {
+//   key: 'root',
+//   storage
+// };
 
-const persistedReducer = persistReducer(persistConfig);
+//const persistedReducer = persistReducer(persistConfig);
 
 
 export default configureStore({
   reducer: {
-    reducer: persistedReducer,
+    //reducer: persistedReducer,
     search: searchReducer,
     addMovies: toggleIsFetchingReducer,
     isOpen: modalSliceReducer,
