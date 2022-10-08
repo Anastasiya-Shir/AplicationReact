@@ -4,6 +4,7 @@ import searchReducer from "./searchQuery";
 import toggleIsFetchingReducer from './thunk/LoadingMovieList';
 import modalSliceReducer from './ModalSlice/index';
 import UsersSlice from './UsersSlice';
+import isUserAutherized from './isUserAutherized/index';
 import { persistReducer } from 'redux-persist'
 // import toggleIsFetchingReducer from "./toggleIsFetchingReducer"
 
@@ -22,6 +23,7 @@ export default configureStore({
     addMovies: toggleIsFetchingReducer,
     isOpen: modalSliceReducer,
     addUsers: UsersSlice,
+    authorized: isUserAutherized,
   },
 
 })

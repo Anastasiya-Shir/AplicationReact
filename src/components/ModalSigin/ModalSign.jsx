@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { isModalOpen } from '../store/ModalSlice';
 import { isAuth } from "../store/UsersSlice";
 import { isNotAuth } from "../store/UsersSlice";
+import { isUserAuthoriz } from "../store/isUserAutherized"
 import AlertSegnIn from "../AlertSigIn/AlertSigIn";
 
 const style = {
@@ -31,52 +32,47 @@ const ModalSignIn = (props) => {
   const { setFormType } = props;
   const [password, setPVavue] = useState('')
   const [email, setEmail] = useState('');
-  const [errorMesege, setErrorMessege] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(true);
+
   const dispatch = useDispatch();
 
   const handleClose = () => dispatch(isModalOpen(false));
 
   const isModalOpen1 = useSelector(state => state.isOpen.isOpen);
+
   const users = useSelector(state => state.addUsers.users);
-  const isAuthTwo = () => dispatch(isAuth(email));
+
   const isNotAuthTwo = () => dispatch(isNotAuth());
 
   const signIn = () => {
-
-    const isUserAuthrized = {
-      email,
-    };
+    dispatch(isUserAuthoriz({ email }))
+    // const isUserAuthrized = {
+    //   email,
+    // };
 
     // const usersJson = localStorage.getItem('users');
     // // const users = JSON.parse(usersJson) || [];
 
     function searchUser() {
-      console.log(users, "userInfo ")
+
       const userInfo = users.find(item => item.email === email);
-      console.log(userInfo, "userInfo ")
+
       return userInfo;
     }
 
     const searchUserInfo = searchUser();
 
     if (searchUserInfo && searchUserInfo.password === password) {
-      // users.forEach(element => {
-      //   element.isAuth = false;
-      // });
-      isNotAuthTwo();
-      // searchUserInfo.isAuth = true;
-      console.log("email auth", email)
-      isAuthTwo(email)
-      // localStorage.setItem("isUserAuthrized", JSON.stringify(isUserAuthrized));
 
-      // localStorage.setItem("users", JSON.stringify(users));
+      isNotAuthTwo();
+
+      console.log("email auth", email)
+      dispatch(isAuth({ email }))
 
       const event = new StorageEvent('storage', {
         key: 'isUserAuthrized',
         newValue: email,
       });
-      window.dispatchEvent(event);
+      // window.dispatchEvent(event);
       // return <AlertSegnIn />
       alert(" Sign in")
     } else alert("Check you password or email");

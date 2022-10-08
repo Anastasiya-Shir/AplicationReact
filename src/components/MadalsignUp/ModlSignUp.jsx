@@ -9,8 +9,9 @@ import { Form, Field } from 'react-final-form';
 import { useSelector, useDispatch } from 'react-redux';
 import Styles from "../ModalSigin/Styles";
 import { addNewUser } from "../store/UsersSlice";
+import { isModalOpen } from '../store/ModalSlice';
 //import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import Button from '@mui/material/Button';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -46,14 +47,14 @@ export default function ModalSignUp(props) {
 
   const dispatch = useDispatch();
 
-  const isModalOpen = useSelector(state => state.isOpen.isOpen);
+  const isModalOpenn = useSelector(state => state.isOpen.isOpen);
+
+  const users = useSelector(state => state.addUsers.users);
 
   const handleClose = () => {
     dispatch(isModalOpen(false))
     setFormType(false)
   };
-
-
 
   const addUser = () => dispatch(addNewUser({ email, lastName, firstName, phonemail, password }));
   // const validateEmail = (email) => {
@@ -68,10 +69,12 @@ export default function ModalSignUp(props) {
   //   } else setButtonDisabled(true)
   // } //нужно иссправить баг с disabled button() разобра]]]]]]]]]]]]]]]]]]]]]]
 
-  // const validPassword = (a, b) => {
-  //   (a === b) ? setErrorMessege(false) && setButtonDisabled(true)
-  //     : setErrorMessege(true);
-  // }
+  const validPassword = (a, b) => {
+    (a === b) ? setErrorMessege(false) : setErrorMessege(true);
+
+    console.log(a === b, "a==b");
+    console.log(errorMesege)
+  }
 
   const searchsimpleUser = (users, newUser) => {
 
@@ -79,9 +82,7 @@ export default function ModalSignUp(props) {
   }
 
   const handleSubmit = () => {
-    const usersJson = localStorage.getItem('users');
-    const users = JSON.parse(usersJson) || [];
-
+    validPassword(password, repeatpassword);
     const newUser = {
       email,
       password,
@@ -90,12 +91,22 @@ export default function ModalSignUp(props) {
       lastName,
     };
 
-    if (!searchsimpleUser(users, newUser)) {
-      localStorage.setItem("users", JSON.stringify([...users, newUser]));
-      setLogin(true)
-    } else alert("Такой пользователь уже ест")
-  }
+    console.log(password === repeatpassword, "repp")
+    if (!searchsimpleUser(users, newUser) && !errorMesege) {
+      console.log(errorMesege, "errormessege")
 
+      addUser();
+
+      setLogin(true);
+    }
+
+    else if (errorMesege) {
+      console.log(errorMesege, "not correct")
+      alert("repeat password not correct")
+    }
+
+    else alert("Такой пользователь уже ест")
+  }
 
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -111,13 +122,19 @@ export default function ModalSignUp(props) {
   const container = {
     background: ' #AAF0D1',
   }
+
   useEffect(() => {
 
   }, [email]);
+
+  // useEffect(() => {
+  //   setErrorMessege(repeatpassword === password)
+  // }, [repeatpassword]);
+
   return (
     <div>
       <Modal
-        open={isModalOpen}
+        open={isModalOpenn}
         onClose={handleClose}>
 
 
@@ -237,13 +254,13 @@ export default function ModalSignUp(props) {
                   </button>
                   <button
                     type="button"
-                    onClick={addUser}
+                    onClick={handleSubmit}
                   // disabled={pristine}
                   >
                     Login
                   </button>
                 </div>
-
+                <p className={errorMesege ? 'errorMessege' : "noErrorMessege"} >Неправильно введеные данные</p>
 
               </form>
             )}

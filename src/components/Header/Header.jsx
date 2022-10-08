@@ -22,11 +22,13 @@ function Header(props) {
   const dispatch = useDispatch();
   const items = useSelector(state => state.addMovies.films)
 
-  window.addEventListener('storage', (e) => {
+  const usersss = useSelector(state => state.addUsers.users);
+
+  window.addEventListener('state', (e) => {
     const emailJson = localStorage.getItem('isUserAuthrized');
 
     const usersEmail = JSON.parse(emailJson) || [];
-
+    console.log("statechange")
     setIsUserAuthorized(usersEmail.email);
 
     dispatch(isModalOpen(false))

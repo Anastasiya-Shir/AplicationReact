@@ -24,7 +24,8 @@ const userSlice = createSlice({
     },
 
     isAuth(state, action) {
-
+      console.log(action.payload.email, "action.payload.email");
+      console.log(state.users[0].email, 'state.users(0).email')
       let index = state.users.findIndex(item => item.email === action.payload.email)
 
 
