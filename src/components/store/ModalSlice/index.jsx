@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit"; let i = 0;
+import { createSlice } from "@reduxjs/toolkit";
+
 const modalSlice = createSlice({
 
   name: "islOpen",

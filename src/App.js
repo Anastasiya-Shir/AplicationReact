@@ -7,7 +7,7 @@ import Description from './components/Description/Disription';
 
 import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 import BasicModal from './components/Modal/Modal';
-import AlertSegnIn from './components/AlertSigIn/AlertSigIn';
+
 function App() {
 
   const [open, setOpen] = useState(false);

@@ -5,27 +5,13 @@ import { Form, Field } from 'react-final-form'
 
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 import Styles from "./Styles";
 import { useSelector, useDispatch } from 'react-redux';
 import { isModalOpen } from '../store/ModalSlice';
 import { isAuth } from "../store/UsersSlice";
 import { isNotAuth } from "../store/UsersSlice";
-import { isUserAuthoriz } from "../store/isUserAutherized"
-import AlertSegnIn from "../AlertSigIn/AlertSigIn";
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import { isUserAuthoriz } from "../store/isUserAutherized";
 
 const ModalSignIn = (props) => {
 
@@ -65,15 +51,8 @@ const ModalSignIn = (props) => {
 
       isNotAuthTwo();
 
-      console.log("email auth", email)
       dispatch(isAuth({ email }))
 
-      const event = new StorageEvent('storage', {
-        key: 'isUserAuthrized',
-        newValue: email,
-      });
-      // window.dispatchEvent(event);
-      // return <AlertSegnIn />
       alert(" Sign in")
     } else alert("Check you password or email");
   }

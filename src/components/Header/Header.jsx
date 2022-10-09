@@ -7,11 +7,12 @@ import useDebounce from "../../service/use-debounce";
 
 import { getFilm } from '../store/searchQuery';
 import { isModalOpen } from '../store/ModalSlice';
+import { isUserAuthoriz } from "../store/isUserAutherized";
 
 function Header(props) {
-  const { setOpen, setFindFilms } = props;
+  const { setFindFilms } = props;
 
-  const [isUserAuthorized, setIsUserAuthorized] = useState('');
+  const [isUserAuthorized, setIsUserAuthorized] = useState(false);
 
   const [inputSearch, setInputSearch] = useState('');
 
@@ -19,20 +20,11 @@ function Header(props) {
 
   const searchFilms = useSelector(state => state.search.search);
 
+  const authorized = useSelector(state => state.authorized.email);
+
   const dispatch = useDispatch();
+
   const items = useSelector(state => state.addMovies.films)
-
-  const usersss = useSelector(state => state.addUsers.users);
-
-  window.addEventListener('state', (e) => {
-    const emailJson = localStorage.getItem('isUserAuthrized');
-
-    const usersEmail = JSON.parse(emailJson) || [];
-    console.log("statechange")
-    setIsUserAuthorized(usersEmail.email);
-
-    dispatch(isModalOpen(false))
-  })
 
   let searchFilm = () => {
 
@@ -63,23 +55,25 @@ function Header(props) {
   }, [inputSearch]);
 
   useEffect(() => {
-    const auth = localStorage.getItem('isUserAuthrized');
-
-    const usersauth = JSON.parse(auth) || [];
-
-    setIsUserAuthorized(usersauth.email);
-  }, []);
-
-  useEffect(() => {
     searchFilm();
 
   }, [debouncedSearchTerm]);
+
+  useEffect(() => {
+
+    if (authorized.length) {
+      console.log(authorized.length, "authorized.length")
+      setIsUserAuthorized(authorized);
+
+      dispatch(isModalOpen(false))
+    }
+  }, [authorized]);
+
 
   return (
     <div className='header'>
       <div className='logoSearch'> <img src={logo} className="logo" alt=" movie poster" />
         <form onSubmit={Def}>
-
           <input type="search" onChange={search
           } placeholder='serch'>
 
@@ -87,19 +81,16 @@ function Header(props) {
         </form>
       </div>
 
-
-
-      {isUserAuthorized === undefined
+      {isUserAuthorized === false
         ? <button type="button" onClick={function () {
-          // setOpen(true)
           dispatch(isModalOpen(true))
         }}> Sign in  </button>
         :
         <div > Hello, {isUserAuthorized}
 
           <button type="button" onClick={function () {
-            localStorage.removeItem("isUserAuthrized")
-            setIsUserAuthorized(undefined)
+            dispatch(isUserAuthoriz({ email: "" }))
+            setIsUserAuthorized(false)
           }}> Sign out  </button>
         </div>}
     </div>

@@ -3,7 +3,7 @@ const isUserAuthorized = createSlice({
 
   name: "authorized",
   initialState: {
-    email: " ",
+    email: "",
   },
   reducers: {
     isUserAuthoriz(state, action) {

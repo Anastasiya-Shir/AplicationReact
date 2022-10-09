@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -12,7 +12,7 @@ function Movies(props) {
   const [scroll, setScroll] = useState(0);
   const [value, setValue] = useState(MINSK);
 
-  const { items, setItems, findFilms } = props;
+  const { findFilms } = props;
 
   const dispatch = useDispatch();
 

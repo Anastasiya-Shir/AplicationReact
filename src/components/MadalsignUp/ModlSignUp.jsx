@@ -12,18 +12,6 @@ import { addNewUser } from "../store/UsersSlice";
 import { isModalOpen } from '../store/ModalSlice';
 //import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
 export default function ModalSignUp(props) {
   const { setFormType } = props;
 
@@ -43,7 +31,7 @@ export default function ModalSignUp(props) {
 
   // const [buttonDisabled, setButtonDisabled] = useState(true);
 
-  const [login, setLogin] = useState(false);
+  // const [login, setLogin] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -93,15 +81,13 @@ export default function ModalSignUp(props) {
 
     console.log(password === repeatpassword, "repp")
     if (!searchsimpleUser(users, newUser) && !errorMesege) {
-      console.log(errorMesege, "errormessege")
 
       addUser();
 
-      setLogin(true);
+      // setLogin(true);
     }
 
     else if (errorMesege) {
-      console.log(errorMesege, "not correct")
       alert("repeat password not correct")
     }
 
@@ -126,10 +112,6 @@ export default function ModalSignUp(props) {
   useEffect(() => {
 
   }, [email]);
-
-  // useEffect(() => {
-  //   setErrorMessege(repeatpassword === password)
-  // }, [repeatpassword]);
 
   return (
     <div>
@@ -239,7 +221,7 @@ export default function ModalSignUp(props) {
                     <div>
                       <label>Repeat password</label>
                       <input {...input} type="password"
-                        value={repeatpassword} onChange={(e) => { setRepeatpassword(e.target.value) }} placeholder="Repeat Password" />
+                        value={repeatpassword} onChange={(e) => { setRepeatpassword(e.target.value); setErrorMessege(e.target.value === password) }} placeholder="Repeat Password" />
                       {meta.error && meta.touched && <span>{meta.error}</span>}
 
                     </div>
