@@ -12,6 +12,7 @@ import { isModalOpen } from '../store/ModalSlice';
 import { isAuth } from "../store/UsersSlice";
 import { isNotAuth } from "../store/UsersSlice";
 import { isUserAuthoriz } from "../store/isUserAutherized";
+import { isModalOpenSelector } from '../store/selectors';
 
 const ModalSignIn = (props) => {
 
@@ -23,7 +24,7 @@ const ModalSignIn = (props) => {
 
   const handleClose = () => dispatch(isModalOpen(false));
 
-  const isModalOpen1 = useSelector(state => state.isOpen.isOpen);
+  const isModalOpen1 = useSelector(isModalOpenSelector);
 
   const users = useSelector(state => state.addUsers.users);
 
@@ -31,12 +32,6 @@ const ModalSignIn = (props) => {
 
   const signIn = () => {
     dispatch(isUserAuthoriz({ email }))
-    // const isUserAuthrized = {
-    //   email,
-    // };
-
-    // const usersJson = localStorage.getItem('users');
-    // // const users = JSON.parse(usersJson) || [];
 
     function searchUser() {
 
@@ -56,10 +51,6 @@ const ModalSignIn = (props) => {
       alert(" Sign in")
     } else alert("Check you password or email");
   }
-
-  // const getBtnDisabled = () => {
-  //   (password.length && email.length) ? setButtonDisabled(false) : setButtonDisabled(true);
-  // }
 
   const handleChangeInput = (type) => (e) => {
     switch (type) {
@@ -99,9 +90,7 @@ const ModalSignIn = (props) => {
     background: ' #AAF0D1',
   }
 
-  function Def(e) {
-    e.preventDefault();
-  }
+  const doNoUpdate = (e) => e.preventDefault();
 
   useEffect(() => {
 
@@ -138,7 +127,7 @@ const ModalSignIn = (props) => {
           }}
 
           render={({ form, submitting, pristine, values, email, password, handleCloseModal }) => (
-            <form style={container} onSubmit={Def} >
+            <form style={container} onSubmit={doNoUpdate} >
               <h2>Sign In</h2>
 
               <Field name="email">

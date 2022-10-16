@@ -14,7 +14,6 @@
   background-color: #00ffff;
   width: 80%;
 }
-
 .header button {
   width: 150px;
   height: 40px;
@@ -23,13 +22,11 @@
   color: #7fffd4;
   background-color: #20B2AA;
 }
-
 .header button:hover {
   cursor: pointer;
   box-shadow: 0 0 6px 6px #00CED1;
   transition: 0.3s;
 }
-
 .header input {
   border-radius: 10px;
   width: 150px;
@@ -38,17 +35,15 @@
   border: none;
   margin-left: 10px;
 }
-
 .header .logoSearch {
   display: flex;
   flex-direction: row;
 }
 
-.Main {
+.main {
   background: linear-gradient(90deg, #b9deed, #efefef);
 }
-
-.Main select {
+.main select {
   width: 100px;
   height: 40px;
   border: none;
@@ -60,7 +55,6 @@
 
 .movieList {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -73,7 +67,6 @@
   align-items: center;
   margin-bottom: 100px;
 }
-
 .movieCard a {
   margin: 50px;
   width: 50%;
@@ -86,24 +79,20 @@
   text-align: center;
   padding: 0;
 }
-
 .movieCard img {
   width: 40%;
   opacity: 0.4;
   margin: 10px;
 }
-
 .movieCard img:hover {
   width: 50%;
   opacity: 1;
 }
-
 .movieCard h1 {
   font-size: 20px;
   width: 300px;
   padding: 0;
 }
-
 .movieCard button {
   width: 40%;
   height: 30px;
@@ -113,7 +102,6 @@
   color: #008080;
   font-weight: 600;
 }
-
 .movieCard button:hover {
   cursor: pointer;
   box-shadow: 0 0 6px 2px #00CED1;
@@ -154,7 +142,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  background: #FF3D00;
+  background: #ff0000;
   width: 6px;
   height: 6px;
   transform: translate(150%, 150%);
@@ -227,4 +215,4 @@
 
 .offLogin {
   display: none;
-}/*# sourceMappingURL=App.css.map */
+}

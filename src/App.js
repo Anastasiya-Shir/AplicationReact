@@ -10,10 +10,6 @@ import BasicModal from './components/Modal/Modal';
 
 function App() {
 
-  const [open, setOpen] = useState(false);
-
-  const [items, setItems] = useState([]);
-
   const [findFilms, setFindFilms] = useState([]);
 
 
@@ -24,10 +20,10 @@ function App() {
 
         <div className="app">
 
-          <Header setOpen={setOpen} items={items} setFindFilms={setFindFilms} />
+          <Header setFindFilms={setFindFilms} />
 
           <Routes>
-            <Route exact path="/" element={<Movies items={items} setItems={setItems} findFilms={findFilms} />} />
+            <Route exact path="/" element={<Movies findFilms={findFilms} />} />
             <Route path="/movie-description/:eventId" element={<Description />} />
             <Route path="*" element={<NotFoundPage />} />
             {/* <Route path="/suscefully" element={<AlertSegnIn />} /> */}
@@ -35,7 +31,7 @@ function App() {
         </div>
       </Router>
 
-      <BasicModal open={open} setOpen={setOpen} />
+      <BasicModal />
     </>
   );
 }

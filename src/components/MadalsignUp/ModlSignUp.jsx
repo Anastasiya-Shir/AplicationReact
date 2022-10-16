@@ -10,7 +10,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import Styles from "../ModalSigin/Styles";
 import { addNewUser } from "../store/UsersSlice";
 import { isModalOpen } from '../store/ModalSlice';
+import { isModalOpenSelect } from '../store/selectors';
 //import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { usersSelect } from '../store/selectors';
+import { newUserInfo } from '../store/newUser';
 
 export default function ModalSignUp(props) {
   const { setFormType } = props;
@@ -29,15 +32,17 @@ export default function ModalSignUp(props) {
 
   const [errorMesege, setErrorMessege] = useState(false);
 
+  const isModalOpen1 = useSelector(isModalOpenSelect);
+
+  const isSimpleUser = useSelector(usersSelect);
+
   // const [buttonDisabled, setButtonDisabled] = useState(true);
 
   // const [login, setLogin] = useState(false);
 
   const dispatch = useDispatch();
 
-  const isModalOpenn = useSelector(state => state.isOpen.isOpen);
-
-  const users = useSelector(state => state.addUsers.users);
+  // const isModalOpenn = isModalOpenSelect;
 
   const handleClose = () => {
     dispatch(isModalOpen(false))
@@ -65,23 +70,29 @@ export default function ModalSignUp(props) {
   }
 
   const searchsimpleUser = (users, newUser) => {
-
-    return users.find(item => item.email === newUser.email);
+    console.log("h");
+    return users;
   }
 
   const handleSubmit = () => {
     validPassword(password, repeatpassword);
-    const newUser = {
-      email,
-      password,
-      isAuth: false,
-      firstName,
-      lastName,
-    };
+    // const newUser = {
+    //   email,
+    //   password,
+    //   isAuth: false,
+    //   firstName,
+    //   lastName,
+    // };
+    console.log(email, "repp")
+    dispatch(newUserInfo({ email }))
 
-    console.log(password === repeatpassword, "repp")
-    if (!searchsimpleUser(users, newUser) && !errorMesege) {
-
+    console.log(usersSelect, "isSimpleUser")
+    console.log(isModalOpen1, "opeeen")
+    console.log(isSimpleUser, "issimpleuser")
+    if (!isSimpleUser && !errorMesege) {
+      //users,
+      // debugger;
+      dispatch(newUserInfo({ email: "" }))
       addUser();
 
       // setLogin(true);
@@ -116,7 +127,7 @@ export default function ModalSignUp(props) {
   return (
     <div>
       <Modal
-        open={isModalOpenn}
+        open={isModalOpen1}
         onClose={handleClose}>
 
 

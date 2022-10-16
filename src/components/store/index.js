@@ -5,7 +5,8 @@ import toggleIsFetchingReducer from './thunk/LoadingMovieList';
 import modalSliceReducer from './ModalSlice/index';
 import UsersSlice from './UsersSlice';
 import isUserAutherized from './isUserAutherized/index';
-import { persistReducer } from 'redux-persist'
+import { persistReducer } from 'redux-persist';
+import newUser, { newUserInfo } from './newUser';
 // import toggleIsFetchingReducer from "./toggleIsFetchingReducer"
 
 // const persistConfig = {
@@ -24,6 +25,7 @@ export default configureStore({
     isOpen: modalSliceReducer,
     addUsers: UsersSlice,
     authorized: isUserAutherized,
+    newUserInfo: newUser,
   },
 
 })

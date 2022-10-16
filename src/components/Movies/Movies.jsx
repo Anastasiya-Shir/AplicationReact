@@ -8,6 +8,7 @@ import '../../App.css';
 
 import { fetchMovies } from '../store/thunk/LoadingMovieList';
 import { MINSK, GRODNO } from "../../const/Const";
+
 function Movies(props) {
   const [scroll, setScroll] = useState(0);
   const [value, setValue] = useState(MINSK);
@@ -58,7 +59,7 @@ function Movies(props) {
   } else {
 
     return (
-      <div className="Main">
+      <div className="main">
         <select onChange={changeSelect} className="selectCity" st>
           <option>Минск</option>
           <option>Гродно</option>

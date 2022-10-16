@@ -1,6 +1,12 @@
 $turquoise: #00ffff;
 $red: #ff0000;
 $aquamarine:#7fffd4;
+$lightSeaGreenColor:#20B2AA;
+$darkTurquoiseColor:#00CED1;
+$skyWandererColor:#b9deed;
+$superSilverColor:#efefef;
+$tealColor:#008080;
+$yellowColor:#ad2;
 
 .app {
   text-align: center;
@@ -24,14 +30,14 @@ button{
   height: 40px;
   border:none;
   border-radius: 20px; 
-  color:#7fffd4;
-  background-color: #20B2AA;
+  color:$aquamarine;
+  background-color: $lightSeaGreenColor;
   
 }
 
 button:hover {	
 cursor: pointer;
-	 box-shadow: 0 0 6px 6px #00CED1;
+	 box-shadow: 0 0 6px 6px $darkTurquoiseColor;
   transition: .3s;
 }
 input{
@@ -51,13 +57,13 @@ input{
 
 }
 
-.Main{
-  background: linear-gradient(90deg, #b9deed, #efefef);
+.main{
+  background: linear-gradient(90deg, $skyWandererColor, $superSilverColor);
   select{
     width: 100px;
     height: 40px;
     border:none;  
-    background-color: #20B2AA;
+    background-color: $lightSeaGreenColor;
     margin:10px center;
     text-align: center;
     border-radius: 10px;
@@ -66,8 +72,7 @@ input{
 }
 
 .movieList{
-  display: flex;
-  flex-direction: row;
+  display: flex;  
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -113,12 +118,12 @@ button{
   border-radius: 10px;
   border:none;
   background-color: $turquoise;
-  color:#008080;
+  color:$tealColor;
   font-weight: 600;
 }
 button:hover{
   cursor: pointer;
-  box-shadow: 0 0 6px 2px #00CED1;
+  box-shadow: 0 0 6px 2px $darkTurquoiseColor;
  transition: .3s;
   
 }
@@ -159,7 +164,7 @@ button:hover{
   position: absolute;
   left: 0;
   top: 0;
-  background: #FF3D00;
+  background: $red;
   width: 6px;
   height: 6px;
   transform: translate(150%, 150%);
@@ -217,7 +222,7 @@ display:none
 
 .onLogin{
   display:inline;
-  color: #ad2;
+  color: $yellowColor;
 
 }
 .offLogin{

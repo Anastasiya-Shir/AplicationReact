@@ -36,13 +36,11 @@ function Header(props) {
     }
   };
 
-  function Def(e) {
+  function doNoUpdate(e) {
     e.preventDefault();
   }
+  const handleSearch = (e) => setInputSearch(e.target.value);
 
-  function search(e) {
-    setInputSearch(e.target.value)
-  }
 
   useEffect(() => {
     const newMovies = inputSearch;
@@ -73,8 +71,8 @@ function Header(props) {
   return (
     <div className='header'>
       <div className='logoSearch'> <img src={logo} className="logo" alt=" movie poster" />
-        <form onSubmit={Def}>
-          <input type="search" onChange={search
+        <form onSubmit={doNoUpdate}>
+          <input type="search" onChange={handleSearch
           } placeholder='serch'>
 
           </input>

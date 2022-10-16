@@ -10,8 +10,7 @@ import { isModalOpen } from '../store/ModalSlice';
 import Button from '@mui/material/Button';
 
 
-export default function AlertSegnIn() {
-
+function AlertSegnIn() {
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
   const onSubmit = async values => {
@@ -19,12 +18,10 @@ export default function AlertSegnIn() {
     window.alert(JSON.stringify(values, 0, 2))
   }
 
-
   return (
     <Styles>
       <h1>you have successfully signed up/in  </h1>
       <Form onSubmit={onSubmit}>
-
         <Field>
           <Button>
             Ok
@@ -34,3 +31,5 @@ export default function AlertSegnIn() {
     </Styles>
   )
 }
+
+export default AlertSegnIn;
