@@ -18,7 +18,7 @@ export const usersSelect = createSelector(getUsersSelectors, newUserInfo, (users
   console.log(email, "email")
   console.log(users.find(item => item.email === email), "i m heree")
 
-  if ((users.find(item => item.email === email) === undefined) && email != "" || users === []) {
+  if ((users.find(item => item.email === email) === undefined) || users === []) {
     console.log("im false")
     return false;
   } else {
