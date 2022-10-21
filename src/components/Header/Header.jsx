@@ -8,9 +8,11 @@ import useDebounce from "../../service/use-debounce";
 import { getFilm } from '../store/searchQuery';
 import { isModalOpen } from '../store/ModalSlice';
 import { isUserAuthoriz } from "../store/isUserAutherized";
+import { isUserAuth } from '../store/selectors';
 
 function Header(props) {
   const { setFindFilms } = props;
+  const isAuth = useSelector(isUserAuth);
 
   const [isUserAuthorized, setIsUserAuthorized] = useState(false);
 
@@ -60,8 +62,6 @@ function Header(props) {
   useEffect(() => {
 
     if (authorized.length) {
-      console.log(authorized.length, "authorized.length")
-      setIsUserAuthorized(authorized);
 
       dispatch(isModalOpen(false))
     }
@@ -79,18 +79,19 @@ function Header(props) {
         </form>
       </div>
 
-      {isUserAuthorized === false
+      {isAuth == false
         ? <button type="button" onClick={function () {
           dispatch(isModalOpen(true))
         }}> Sign in  </button>
         :
-        <div > Hello, {isUserAuthorized}
+        <div > Hello, {isAuth}
 
           <button type="button" onClick={function () {
-            dispatch(isUserAuthoriz({ email: "" }))
-            setIsUserAuthorized(false)
+            dispatch(isUserAuthoriz({ email: false }))
+            // setIsUserAuthorized(false)
           }}> Sign out  </button>
-        </div>}
+        </div>
+      }
     </div>
   )
 };

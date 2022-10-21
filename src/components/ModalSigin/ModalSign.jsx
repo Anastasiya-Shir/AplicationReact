@@ -14,7 +14,7 @@ import { isModalOpen } from '../store/ModalSlice';
 import { isAuth } from "../store/UsersSlice";
 import { isNotAuth } from "../store/UsersSlice";
 import { isUserAuthoriz } from "../store/isUserAutherized";
-import { isModalOpenSelector } from '../store/selectors';
+import { isModalOpenSelector, usersSelect } from '../store/selectors';
 
 const ModalSignIn = (props) => {
 
@@ -28,28 +28,38 @@ const ModalSignIn = (props) => {
 
   const isModalOpenSelect = useSelector(isModalOpenSelector);
 
-  const users = useSelector(state => state.addUsers.users);
+  const users = useSelector(usersSelect);
 
   const isNotAuthTwo = () => dispatch(isNotAuth());
 
   const signIn = () => {
-    dispatch(isUserAuthoriz({ email }))
+    // dispatch(isUserAuthoriz({ email }))
 
     function searchUser() {
 
       const userInfo = users.find(item => item.email === email);
+      if (userInfo === undefined) {
+        console.log(userInfo, "userInfofalse");
+        return false
 
-      return userInfo;
+      }
+      else {
+        console.log(userInfo, "userInfotrue");
+        return userInfo
+      }
+
+
     }
 
     const searchUserInfo = searchUser();
 
     if (searchUserInfo && searchUserInfo.password === password) {
-
+      console.log(searchUserInfo, "(searchUserInfo change name");
       isNotAuthTwo();
 
       dispatch(isAuth({ email }))
 
+      dispatch(isUserAuthoriz({ email }))
       alert(" Sign in")
     } else alert("Check you password or email");
   }
