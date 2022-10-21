@@ -7,7 +7,9 @@ import Modal from '@mui/material/Modal';
 import { Form, Field } from 'react-final-form';
 
 import { useSelector, useDispatch } from 'react-redux';
+
 import Styles from "../ModalSigin/Styles";
+
 import { addNewUser } from "../store/UsersSlice";
 import { isModalOpen } from '../store/ModalSlice';
 import { isModalOpenSelect } from '../store/selectors';
@@ -50,52 +52,25 @@ export default function ModalSignUp(props) {
   };
 
   const addUser = () => dispatch(addNewUser({ email, lastName, firstName, phonemail, password }));
-  // const validateEmail = (email) => {
-  //   const re = /\S+@\S+\.\S+/;
-
-  //   return (re.test(email));
-  // };
-
-  // const getBtnDisabled = () => {
-  //   if (firstName.length > 0 && lastName.length > 0 && phonemail.length > 0 && repeatpassword.length > 0 && password.length > 0 && email.length > 0 && errorMesege === false) {
-  //     setButtonDisabled(false)
-  //   } else setButtonDisabled(true)
-  // } //нужно иссправить баг с disabled button() разобра]]]]]]]]]]]]]]]]]]]]]]
 
   const validPassword = (a, b) => {
     (a === b) ? setErrorMessege(false) : setErrorMessege(true);
-
-    console.log(a === b, "a==b");
-    console.log(errorMesege)
   }
 
-  const searchsimpleUser = (users, newUser) => {
+  const searchsimpleUser = () => {
     console.log("h");
-    return users;
+    return isSimpleUser.find(item => item.email === email);
   }
 
   const handleSubmit = () => {
+
     validPassword(password, repeatpassword);
-    // const newUser = {
-    //   email,
-    //   password,
-    //   isAuth: false,
-    //   firstName,
-    //   lastName,
-    // };
-    console.log(email, "repp")
+
     dispatch(newUserInfo({ email }))
 
-    console.log(usersSelect, "isSimpleUser")
-    console.log(isModalOpen1, "opeeen")
-    console.log(isSimpleUser, "issimpleuser")
-    if (!isSimpleUser && !errorMesege) {
-      //users,
-      // debugger;
+    if (!searchsimpleUser() && !errorMesege) {
       dispatch(newUserInfo({ email: "" }))
       addUser();
-
-      // setLogin(true);
     }
 
     else if (errorMesege) {
@@ -112,7 +87,7 @@ export default function ModalSignUp(props) {
     window.alert(JSON.stringify(values, 0, 2))
   }
 
-  function Def(e) {
+  function stopUpdate(e) {
     e.preventDefault();
   }
 
@@ -165,7 +140,7 @@ export default function ModalSignUp(props) {
             }}
 
             render={({ handleSignIn, form, submitting, pristine, values, email, password, handleChangeInput, repeatpassword, lastName, firstName, phonemail }) => (
-              <form style={container} onSubmit={Def}>
+              <form style={container} onSubmit={stopUpdate}>
                 <h2>Sign Up</h2>
 
                 <Field name="email">
@@ -260,10 +235,8 @@ export default function ModalSignUp(props) {
           />
         </Styles>
 
-
-
-
       </Modal>
+
       {/* //   aria-labelledby="modal-modal-title"
       //   aria-describedby="modal-modal-description"
 

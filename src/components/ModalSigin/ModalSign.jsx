@@ -7,7 +7,9 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 
 import Styles from "./Styles";
+
 import { useSelector, useDispatch } from 'react-redux';
+
 import { isModalOpen } from '../store/ModalSlice';
 import { isAuth } from "../store/UsersSlice";
 import { isNotAuth } from "../store/UsersSlice";
@@ -24,7 +26,7 @@ const ModalSignIn = (props) => {
 
   const handleClose = () => dispatch(isModalOpen(false));
 
-  const isModalOpen1 = useSelector(isModalOpenSelector);
+  const isModalOpenSelect = useSelector(isModalOpenSelector);
 
   const users = useSelector(state => state.addUsers.users);
 
@@ -57,16 +59,15 @@ const ModalSignIn = (props) => {
       case 'email':
 
         setEmail(e.target.value);
-
         // validateEmail(e.target.value);
-
         // setErrorMessege(!validateEmail(e.target.value));
         // getBtnDisabled();
+
         break;
       case 'Password':
 
         setPVavue(e.target.value);
-        // console.log(password, "setpassword")
+
         // getBtnDisabled();
         break;
       default: console.log("error")
@@ -102,7 +103,7 @@ const ModalSignIn = (props) => {
 
   return (
     <Modal
-      open={isModalOpen1}
+      open={isModalOpenSelect}
       onClose={handleClose}
 
     >
