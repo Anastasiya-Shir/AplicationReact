@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import logo from '../../logo.png';
-
 import useDebounce from "../../service/use-debounce";
 
 import { getFilm } from '../store/searchQuery';
 import { isModalOpen } from '../store/ModalSlice';
 import { isUserAuthoriz } from "../store/isUserAutherized";
-import { isUserAuth } from '../store/selectors';
+import { isUserAuth, searchFilms, authoriz, list, findfilm, lists } from '../store/selectors';
+
+import logo from '../../logo.png';
 
 function Header(props) {
   const { setFindFilms } = props;
+
   const isAuth = useSelector(isUserAuth);
 
   const [isUserAuthorized, setIsUserAuthorized] = useState(false);
@@ -20,18 +21,17 @@ function Header(props) {
 
   const debouncedSearchTerm = useDebounce(inputSearch, 1000);
 
-  const searchFilms = useSelector(state => state.search.search);
+  const searchMovie = useSelector(searchFilms);
 
-  const authorized = useSelector(state => state.authorized.email);
+  const authorized = useSelector(authoriz);
+
+  const findFilms = useSelector(findfilm);
 
   const dispatch = useDispatch();
 
-  const items = useSelector(state => state.addMovies.films)
+  const items = useSelector(list);
 
   let searchFilm = () => {
-
-    let findFilms = items.filter(items =>
-      items.acronym.toUpperCase().includes(searchFilms[searchFilms.length - 1].searchFilms.toUpperCase()))
 
     if (findFilms) {
       setFindFilms(findFilms)

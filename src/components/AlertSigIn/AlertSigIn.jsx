@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
 
-import { Form, Field } from 'react-final-form'
-
-
-import Styles from "../ModalSigin/Styles";
 import { useSelector, useDispatch } from 'react-redux';
+
 import { isModalOpen } from '../store/ModalSlice';
+
+import { Form, Field } from 'react-final-form';
+
 import Button from '@mui/material/Button';
 
+import Styles from "../ModalSigin/Styles";
 
 function AlertSegnIn() {
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))

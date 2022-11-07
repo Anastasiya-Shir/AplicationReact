@@ -1,21 +1,17 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
-//import Box from '@mui/material/Box';
-//import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-
-import { Form, Field } from 'react-final-form';
-
 import { useSelector, useDispatch } from 'react-redux';
-
-import Styles from "../ModalSigin/Styles";
 
 import { addNewUser } from "../store/UsersSlice";
 import { isModalOpen } from '../store/ModalSlice';
 import { isModalOpenSelect } from '../store/selectors';
-//import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { usersSelect } from '../store/selectors';
 import { newUserInfo } from '../store/newUser';
+
+import Modal from '@mui/material/Modal';
+import { Form, Field } from 'react-final-form';
+
+import Styles from "../ModalSigin/Styles";
 
 export default function ModalSignUp(props) {
   const { setFormType } = props;

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
+
 import Header from './components/Header/Header';
 import Movies from './components/Movies/Movies';
 import NotFoundPage from './components/NotFoundPage';
 import Description from './components/Description/Disription';
-
-import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
 import BasicModal from './components/Modal/Modal';
+
+import './App.css';
 
 function App() {
 

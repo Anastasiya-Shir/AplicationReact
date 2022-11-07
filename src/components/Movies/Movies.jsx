@@ -1,13 +1,14 @@
-
 import React, { useState, useEffect } from "react";
-
 import { useSelector, useDispatch } from 'react-redux';
 
-import Movie from "../Movie/Movie";
-import '../../App.css';
-
 import { fetchMovies } from '../store/thunk/LoadingMovieList';
+import { statusMovie, errorMovie, itemMovie } from "../store/selectors";
+
+import Movie from "../Movie/Movie";
+
 import { MINSK, GRODNO } from "../../const/Const";
+
+import '../../App.css';
 
 function Movies(props) {
   const [scroll, setScroll] = useState(0);
@@ -17,11 +18,11 @@ function Movies(props) {
 
   const dispatch = useDispatch();
 
-  const status = useSelector(state => state.addMovies.status);
+  const status = useSelector(statusMovie);
 
-  const error = useSelector(state => state.addMovies.error);
+  const error = useSelector(errorMovie);
 
-  const item = useSelector(state => state.addMovies.films)
+  const item = useSelector(itemMovie)
 
   function changeSelect(event) {
     if (event.target.value === "Минск") {

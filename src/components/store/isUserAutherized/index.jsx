@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 const isUserAuthorized = createSlice({
 
   name: "authorized",

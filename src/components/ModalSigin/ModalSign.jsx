@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
-
-import { Form, Field } from 'react-final-form'
-
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
-
-import Styles from "./Styles";
-
 import { useSelector, useDispatch } from 'react-redux';
+
+import { Form, Field } from 'react-final-form';
 
 import { isModalOpen } from '../store/ModalSlice';
 import { isAuth } from "../store/UsersSlice";
 import { isNotAuth } from "../store/UsersSlice";
 import { isUserAuthoriz } from "../store/isUserAutherized";
 import { isModalOpenSelector, usersSelect } from '../store/selectors';
+
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+
+import Styles from "./Styles";
 
 const ModalSignIn = (props) => {
 
