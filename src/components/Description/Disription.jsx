@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 
 const Description = () => {
   const [post, setPost] = useState([]);
+
   const { name, annotation, posterLink } = post;
+
   const { eventId } = useParams();
 
   useEffect(() => {

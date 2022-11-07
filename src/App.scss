@@ -1,6 +1,4 @@
-$turquoise: #00ffff;
-$red: #ff0000;
-$aquamarine:#7fffd4;
+@import "variables";
 
 .app {
   text-align: center;
@@ -8,31 +6,79 @@ $aquamarine:#7fffd4;
 
 .logo {
   width:45px;
+  
 } 
 
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 3% 10%;
+  padding: 3% 10%;  
   background-color:$turquoise;
   width: 80%;
+
+button{
+  width: 150px;
+  height: 40px;
+  border:none;
+  border-radius: 20px; 
+  color:$aquamarine;
+  background-color: $lightSeaGreenColor;
+  
 }
 
-.button{
-  width: 100px;
+button:hover {	
+cursor: pointer;
+	 box-shadow: 0 0 6px 6px $darkTurquoiseColor;
+  transition: .3s;
 }
+input{
+  border-radius:10px ;
+  width: 150px;
+  height: 30px;
+  padding:10px;
+  border:none;
+  margin-left: 10px;
+  
+}
+.logoSearch{
+  display: flex;
+  flex-direction: row;
+
+}
+
+}
+
+.main{
+  background: linear-gradient(90deg, $skyWandererColor, $superSilverColor);
+  select{
+    width: 100px;
+    height: 40px;
+    border:none;  
+    background-color: $lightSeaGreenColor;
+    margin:10px center;
+    text-align: center;
+    border-radius: 10px;
+
+      }
+}
+
+.movieList{
+  display: flex;  
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .movieCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 250px;
-}
+  align-items: center; 
+  margin-bottom: 100px;
 
-.movieCard a {
+  a {
   margin: 50px;
   width: 50%;
   height: 40px;
@@ -44,17 +90,39 @@ $aquamarine:#7fffd4;
   text-align: center;
   padding: 0;
 }
-
-.movieCard img {
+img {
   width: 40%;
   opacity: 0.4;
-  margin: 1px;
+  margin: 10px;
 }
-
-.movieCard img:hover {
+img:hover {
   width:50%;
   opacity:1;
 }
+h1{
+  font-size: 20px;
+  width: 300px;
+  padding: 0;
+}
+button{
+  width: 40%;
+  height: 30px;
+  border-radius: 10px;
+  border:none;
+  background-color: $turquoise;
+  color:$tealColor;
+  font-weight: 600;
+}
+button:hover{
+  cursor: pointer;
+  box-shadow: 0 0 6px 2px $darkTurquoiseColor;
+ transition: .3s;
+  
+}
+}
+
+
+
 
 .movie-details {
   display: flex;
@@ -88,7 +156,7 @@ $aquamarine:#7fffd4;
   position: absolute;
   left: 0;
   top: 0;
-  background: #FF3D00;
+  background: $red;
   width: 6px;
   height: 6px;
   transform: translate(150%, 150%);
@@ -118,11 +186,13 @@ $aquamarine:#7fffd4;
 
 .show {
   display: inline;
+  position: fixed;
   width:150px;
   height: 30px;
   border-radius: 50px;  
   background:$turquoise;
   border: none;
+  right: 0;
   }
 
 .modal{
@@ -144,7 +214,7 @@ display:none
 
 .onLogin{
   display:inline;
-  color: #ad2;
+  color: $yellowColor;
 
 }
 .offLogin{
